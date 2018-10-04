@@ -20,7 +20,7 @@ namespace AFTS.Models
         public virtual DbSet<Event> Event { get; set; }
         public virtual DbSet<Member> Member { get; set; }
         public virtual DbSet<Schedule> Schedule { get; set; }
-        public virtual DbSet<Schedule> Role { get; set; }
+        public virtual DbSet<Role> Role { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -131,6 +131,6 @@ namespace AFTS.Models
             });
         }
 
-        public DbSet<AFTS.Models.Role> Role_1 { get; set; }
+    
     }
 }

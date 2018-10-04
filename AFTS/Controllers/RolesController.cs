@@ -21,7 +21,7 @@ namespace AFTS.Controllers
         // GET: Roles
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Role_1.ToListAsync());
+            return View(await _context.Role.ToListAsync());
         }
 
         // GET: Roles/Details/5
@@ -32,7 +32,7 @@ namespace AFTS.Controllers
                 return NotFound();
             }
 
-            var role = await _context.Role_1
+            var role = await _context.Role
                 .FirstOrDefaultAsync(m => m.RoleId == id);
             if (role == null)
             {
@@ -72,7 +72,7 @@ namespace AFTS.Controllers
                 return NotFound();
             }
 
-            var role = await _context.Role_1.FindAsync(id);
+            var role = await _context.Role.FindAsync(id);
             if (role == null)
             {
                 return NotFound();
@@ -123,7 +123,7 @@ namespace AFTS.Controllers
                 return NotFound();
             }
 
-            var role = await _context.Role_1
+            var role = await _context.Role
                 .FirstOrDefaultAsync(m => m.RoleId == id);
             if (role == null)
             {
@@ -138,15 +138,15 @@ namespace AFTS.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var role = await _context.Role_1.FindAsync(id);
-            _context.Role_1.Remove(role);
+            var role = await _context.Role.FindAsync(id);
+            _context.Role.Remove(role);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool RoleExists(int id)
         {
-            return _context.Role_1.Any(e => e.RoleId == id);
+            return _context.Role.Any(e => e.RoleId == id);
         }
     }
 }

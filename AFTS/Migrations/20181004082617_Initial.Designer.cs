@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AFTS.Migrations
 {
     [DbContext(typeof(tennisContext))]
-    [Migration("20180927081122_Initial")]
+    [Migration("20181004082617_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -105,9 +105,28 @@ namespace AFTS.Migrations
                         .HasMaxLength(200)
                         .IsUnicode(false);
 
+                    b.Property<int?>("RoleTypeRoleId");
+
                     b.HasKey("MemberId");
 
+                    b.HasIndex("RoleTypeRoleId");
+
                     b.ToTable("member");
+                });
+
+            modelBuilder.Entity("AFTS.Models.Role", b =>
+                {
+                    b.Property<int>("RoleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("role_id")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("RoleType")
+                        .HasColumnName("role_type");
+
+                    b.HasKey("RoleId");
+
+                    b.ToTable("role");
                 });
 
             modelBuilder.Entity("AFTS.Models.Schedule", b =>
@@ -126,6 +145,13 @@ namespace AFTS.Migrations
                     b.HasKey("ScheduleId");
 
                     b.ToTable("schedule");
+                });
+
+            modelBuilder.Entity("AFTS.Models.Member", b =>
+                {
+                    b.HasOne("AFTS.Models.Role", "RoleType")
+                        .WithMany()
+                        .HasForeignKey("RoleTypeRoleId");
                 });
 #pragma warning restore 612, 618
         }
