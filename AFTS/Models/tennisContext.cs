@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using AFTS.Models;
 
 namespace AFTS.Models
 {
@@ -19,6 +20,7 @@ namespace AFTS.Models
         public virtual DbSet<Event> Event { get; set; }
         public virtual DbSet<Member> Member { get; set; }
         public virtual DbSet<Schedule> Schedule { get; set; }
+        public virtual DbSet<Schedule> Role { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -102,6 +104,9 @@ namespace AFTS.Models
                     .HasColumnName("name")
                     .HasMaxLength(200)
                     .IsUnicode(false);
+
+               
+
             });
 
             modelBuilder.Entity<Schedule>(entity =>
@@ -114,6 +119,18 @@ namespace AFTS.Models
 
                 entity.Property(e => e.MemberId).HasColumnName("member_id");
             });
+
+            modelBuilder.Entity<Role>(entity =>
+            {
+                entity.ToTable("role");
+
+                entity.Property(e => e.RoleId).HasColumnName("role_id");
+
+                entity.Property(e => e.RoleType).HasColumnName("role_type");
+
+            });
         }
+
+        public DbSet<AFTS.Models.Role> Role_1 { get; set; }
     }
 }
