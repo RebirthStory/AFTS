@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AFTS.Migrations
 {
     [DbContext(typeof(tennisContext))]
-    [Migration("20181004072721_roles")]
+    [Migration("20181004080557_roles")]
     partial class roles
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
