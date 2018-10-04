@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AFTS.Migrations
 {
     [DbContext(typeof(tennisContext))]
-    [Migration("20181004085406_initial")]
+    [Migration("20181004094007_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -59,8 +59,6 @@ namespace AFTS.Migrations
                         .HasColumnName("event_id")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CoachId1");
-
                     b.Property<DateTime>("Date")
                         .HasColumnName("date")
                         .HasColumnType("date");
@@ -70,6 +68,8 @@ namespace AFTS.Migrations
                         .HasColumnName("description")
                         .HasColumnType("text");
 
+                    b.Property<int?>("MemberId1");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnName("name")
@@ -78,7 +78,7 @@ namespace AFTS.Migrations
 
                     b.HasKey("EventId");
 
-                    b.HasIndex("CoachId1");
+                    b.HasIndex("MemberId1");
 
                     b.ToTable("event");
                 });
@@ -89,6 +89,8 @@ namespace AFTS.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnName("member_id")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Biography");
 
                     b.Property<DateTime>("Dob")
                         .HasColumnName("dob")
@@ -105,6 +107,8 @@ namespace AFTS.Migrations
                         .HasColumnName("name")
                         .HasMaxLength(200)
                         .IsUnicode(false);
+
+                    b.Property<string>("Nickname");
 
                     b.Property<int?>("RoleTypeRoleId");
 
@@ -152,9 +156,9 @@ namespace AFTS.Migrations
 
             modelBuilder.Entity("AFTS.Models.Event", b =>
                 {
-                    b.HasOne("AFTS.Models.Coach", "CoachId")
+                    b.HasOne("AFTS.Models.Member", "MemberId")
                         .WithMany()
-                        .HasForeignKey("CoachId1");
+                        .HasForeignKey("MemberId1");
                 });
 
             modelBuilder.Entity("AFTS.Models.Member", b =>
