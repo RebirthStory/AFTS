@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AFTS.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -25,22 +25,6 @@ namespace AFTS.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "event",
-                columns: table => new
-                {
-                    event_id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    name = table.Column<string>(unicode: false, maxLength: 200, nullable: false),
-                    description = table.Column<string>(type: "text", nullable: false),
-                    coach = table.Column<int>(nullable: true),
-                    date = table.Column<DateTime>(type: "date", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_event", x => x.event_id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "role",
                 columns: table => new
                 {
@@ -54,17 +38,25 @@ namespace AFTS.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "schedule",
+                name: "event",
                 columns: table => new
                 {
-                    schedule_id = table.Column<int>(nullable: false)
+                    event_id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    event_id = table.Column<int>(nullable: false),
-                    member_id = table.Column<int>(nullable: false)
+                    name = table.Column<string>(unicode: false, maxLength: 200, nullable: false),
+                    description = table.Column<string>(type: "text", nullable: false),
+                    CoachId = table.Column<int>(nullable: true),
+                    date = table.Column<DateTime>(type: "date", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_schedule", x => x.schedule_id);
+                    table.PrimaryKey("PK_event", x => x.event_id);
+                    table.ForeignKey(
+                        name: "FK_event_coach_CoachId",
+                        column: x => x.CoachId,
+                        principalTable: "coach",
+                        principalColumn: "coach_id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -89,16 +81,57 @@ namespace AFTS.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "schedule",
+                columns: table => new
+                {
+                    schedule_id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    EventId = table.Column<int>(nullable: true),
+                    MemberId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_schedule", x => x.schedule_id);
+                    table.ForeignKey(
+                        name: "FK_schedule_event_EventId",
+                        column: x => x.EventId,
+                        principalTable: "event",
+                        principalColumn: "event_id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_schedule_member_MemberId",
+                        column: x => x.MemberId,
+                        principalTable: "member",
+                        principalColumn: "member_id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_event_CoachId",
+                table: "event",
+                column: "CoachId");
+
             migrationBuilder.CreateIndex(
                 name: "IX_member_RoleTypeRoleId",
                 table: "member",
                 column: "RoleTypeRoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_schedule_EventId",
+                table: "schedule",
+                column: "EventId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_schedule_MemberId",
+                table: "schedule",
+                column: "MemberId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "coach");
+                name: "schedule");
 
             migrationBuilder.DropTable(
                 name: "event");
@@ -107,7 +140,7 @@ namespace AFTS.Migrations
                 name: "member");
 
             migrationBuilder.DropTable(
-                name: "schedule");
+                name: "coach");
 
             migrationBuilder.DropTable(
                 name: "role");

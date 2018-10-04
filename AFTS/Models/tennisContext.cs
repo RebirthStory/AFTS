@@ -65,7 +65,6 @@ namespace AFTS.Models
 
                 entity.Property(e => e.EventId).HasColumnName("event_id");
 
-                entity.Property(e => e.Coach).HasColumnName("coach");
 
                 entity.Property(e => e.Date)
                     .HasColumnName("date")
@@ -115,9 +114,6 @@ namespace AFTS.Models
 
                 entity.Property(e => e.ScheduleId).HasColumnName("schedule_id");
 
-                entity.Property(e => e.EventId).HasColumnName("event_id");
-
-                entity.Property(e => e.MemberId).HasColumnName("member_id");
             });
 
             modelBuilder.Entity<Role>(entity =>
