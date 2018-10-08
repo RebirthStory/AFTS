@@ -4,14 +4,16 @@ using AFTS.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AFTS.Migrations
 {
     [DbContext(typeof(tennisContext))]
-    partial class tennisContextModelSnapshot : ModelSnapshot
+    [Migration("20181008110656_defaultValues")]
+    partial class defaultValues
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -116,14 +118,11 @@ namespace AFTS.Migrations
                     b.Property<string>("Password")
                         .IsRequired();
 
-                    b.Property<int>("RoleId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("role_id")
-                        .HasDefaultValue(3);
+                    b.Property<int?>("RoleId1");
 
                     b.HasKey("MemberId");
 
-                    b.HasIndex("RoleId");
+                    b.HasIndex("RoleId1");
 
                     b.ToTable("member");
                 });
@@ -174,10 +173,9 @@ namespace AFTS.Migrations
 
             modelBuilder.Entity("AFTS.Models.Member", b =>
                 {
-                    b.HasOne("AFTS.Models.Role", "Role")
+                    b.HasOne("AFTS.Models.Role", "RoleId")
                         .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("RoleId1");
                 });
 
             modelBuilder.Entity("AFTS.Models.Schedule", b =>

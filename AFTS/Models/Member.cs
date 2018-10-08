@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace AFTS.Models
@@ -25,7 +26,11 @@ namespace AFTS.Models
         [Required(ErrorMessage = "Date of Birth is required.")]
         public DateTime Dob { get; set; }
 
-        public Role RoleId { get; set; }
+
+        
+        public int RoleId { get; set; }
+
+        public Role Role { get; set; }
 
         [Required(ErrorMessage = "Gender is required.")]
         public string Gender { get; set; }

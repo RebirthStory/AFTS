@@ -95,7 +95,7 @@ namespace AFTS.Models
                 entity.Property(e => e.Gender)
                     .IsRequired()
                     .HasColumnName("gender")
-                    .HasMaxLength(1)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Name)
@@ -104,7 +104,10 @@ namespace AFTS.Models
                     .HasMaxLength(200)
                     .IsUnicode(false);
 
-               
+                entity.Property(e => e.RoleId).HasColumnName("role_id")
+                .HasDefaultValue(3);
+
+
 
             });
 
@@ -122,7 +125,9 @@ namespace AFTS.Models
 
                 entity.Property(e => e.RoleId).HasColumnName("role_id");
 
-                entity.Property(e => e.RoleType).HasColumnName("role_type");
+                entity.Property(e => e.RoleType).HasColumnName("role_type")
+                .HasDefaultValue("Member");
+
 
             });
         }

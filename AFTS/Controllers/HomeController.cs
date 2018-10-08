@@ -98,6 +98,7 @@ namespace AFTS.Controllers
             if (HttpContext.Session.GetString("MemberId") != null)
             {
                 ViewBag.Email = HttpContext.Session.GetString("Email");
+                ViewBag.MemberId = HttpContext.Session.GetString("MemberId");
                 return View();
             }
             else

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AFTS.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace AFTS.Controllers
 {
@@ -143,6 +144,16 @@ namespace AFTS.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Enroll(int id)
+        {
+            ViewBag.MemberId = HttpContext.Session.GetString("MemberId");
+            return RedirectToAction(nameof(Index));
+        }
+
+
 
         private bool EventExists(int id)
         {
