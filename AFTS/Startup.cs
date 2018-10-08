@@ -38,6 +38,13 @@ namespace AFTS
             services.AddDbContext<tennisContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+
+            // Services added for custom login
+            services.AddDistributedMemoryCache();
+            services.AddSession();
+
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,6 +63,9 @@ namespace AFTS
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+
+            // Added for session
+            app.UseSession();
 
             app.UseMvc(routes =>
             {
