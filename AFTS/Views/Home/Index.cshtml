@@ -2,105 +2,110 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
-    <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-    </ol>
-    <div class="carousel-inner" role="listbox">
-        <div class="item active">
-            <img src="~/images/banner1.svg" alt="ASP.NET" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <p>
-                    Learn how to build ASP.NET apps that can run anywhere.
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525028&clcid=0x409">
-                        Learn More
-                    </a>
-                </p>
-            </div>
-        </div>
-        <div class="item">
-            <img src="~/images/banner2.svg" alt="Visual Studio" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <p>
-                    There are powerful new features in Visual Studio for building modern web apps.
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525030&clcid=0x409">
-                        Learn More
-                    </a>
-                </p>
-            </div>
-        </div>
-        <div class="item">
-            <img src="~/images/banner3.svg" alt="Microsoft Azure" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <p>
-                    Learn how Microsoft's Azure cloud platform allows you to build, deploy, and scale web apps.
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525027&clcid=0x409">
-                        Learn More
-                    </a>
-                </p>
-            </div>
-        </div>
-    </div>
-    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
+<div class="banner">
+    <h1 class="banner-head">
+        Simple Pricing.<br>
+        Try before you buy.
+    </h1>
 </div>
 
-<div class="row">
-    <div class="col-md-3">
-        <h2>Account User</h2>
-        <ul>
-
-            <a class="btn btn-success" href="https://go.microsoft.com/fwlink/?LinkID=525027&clcid=0x409">
-                Register
-            </a>
-
-            <br/>
-
-            <a class="btn btn-primary" href="https://go.microsoft.com/fwlink/?LinkID=525027&clcid=0x409">
-                Sign In
-            </a>
-
-            <br/>
-
-          <a href="">Forgot Password</a>
-        </ul>
+<div class="l-content">
+    <div class="pricing-tables pure-g">
+        <div class="pure-u-1 pure-u-md-1-3">
+            <div class="pricing-table pricing-table-free">
+                <div class="pricing-table-header">
+                    <h2>Personal</h2>
+                    <span class="pricing-table-price">
+                        $5 <span>per month</span>
+                    </span>
+                </div>
+                <ul class="pricing-table-list">
+                    <li>Free setup</li>
+                    <li>Custom sub-domain</li>
+                    <li>Standard customer support</li>
+                    <li>1GB file storage</li>
+                    <li>1 database</li>
+                    <li>Unlimited bandwidth</li>
+                </ul>
+                <button class="button-choose pure-button">Choose</button>
+            </div>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-3">
+            <div class="pricing-table pricing-table-biz pricing-table-selected">
+                <div class="pricing-table-header">
+                    <h2>Small Business</h2>
+                    <span class="pricing-table-price">
+                        $25 <span>per month</span>
+                    </span>
+                </div>
+                <ul class="pricing-table-list">
+                    <li>Free setup</li>
+                    <li>Use your own domain</li>
+                    <li>Standard customer support</li>
+                    <li>10GB file storage</li>
+                    <li>5 databases</li>
+                    <li>Unlimited bandwidth</li>
+                </ul>
+                <button class="button-choose pure-button">Choose</button>
+            </div>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-3">
+            <div class="pricing-table pricing-table-enterprise">
+                <div class="pricing-table-header">
+                    <h2>Enterprise</h2>
+                    <span class="pricing-table-price">
+                        $45 <span>per month</span>
+                    </span>
+                </div>
+                <ul class="pricing-table-list">
+                    <li>Free setup</li>
+                    <li>Use your own domain</li>
+                    <li>Premium customer support</li>
+                    <li>Unlimited file storage</li>
+                    <li>25 databases</li>
+                    <li>Unlimited bandwidth</li>
+                </ul>
+                <button class="button-choose pure-button">Choose</button>
+            </div>
+        </div>
     </div>
-    <div class="col-md-3">
-        <h2>Help</h2>
-        <ul>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=398600">Add a Controller and View</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699315">Manage User Secrets using Secret Manager.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699316">Use logging to log a message.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699317">Add packages using NuGet.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699319">Target development, staging or production environment.</a></li>
-        </ul>
+</div> <!-- end pricing-tables -->
+
+
+<div class="information pure-g">
+    <div class="pure-u-1 pure-u-md-1-2">
+        <div class="l-box">
+            <h3 class="information-head">Get started today</h3>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
+            </p>
+        </div>
     </div>
-    <div class="col-md-3">
-        <h2>Overview</h2>
-        <ul>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=518008">Conceptual overview of what is ASP.NET Core</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699320">Fundamentals of ASP.NET Core such as Startup and middleware.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=398602">Working with Data</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=398603">Security</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=699321">Client side development</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=699322">Develop on different platforms</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=699323">Read more on the documentation site</a></li>
-        </ul>
+    <div class="pure-u-1 pure-u-md-1-2">
+        <div class="l-box">
+            <h3 class="information-head">Pay monthly or annually</h3>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ullamco laboris nisi ut aliquip ex ea commodo
+                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse.
+            </p>
+        </div>
     </div>
-    <div class="col-md-3">
-        <h2>Coach &amp; Players</h2>
-        <ul>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=517851">Coaches</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=517853">Players</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=398609">Referees</a></li>
-        </ul>
+    <div class="pure-u-1 pure-u-md-1-2">
+        <div class="l-box">
+            <h3 class="information-head">24/7 customer support</h3>
+            <p>
+                Cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </p>
+        </div>
     </div>
-</div>
+    <div class="pure-u-1 pure-u-md-1-2">
+        <div class="l-box">
+            <h3 class="information-head">Cancel your plan anytime</h3>
+            <p>
+                Duis aute irure dolor in reprehenderit in voluptate velit esse
+                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+        </div>
+    </div>
+</div> <!-- end information -->
+    </div> <!-- end l-content -->
