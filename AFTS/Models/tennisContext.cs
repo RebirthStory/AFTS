@@ -80,6 +80,8 @@ namespace AFTS.Models
                     .HasColumnName("name")
                     .HasMaxLength(200)
                     .IsUnicode(false);
+
+
             });
 
             modelBuilder.Entity<Member>(entity =>
@@ -116,6 +118,7 @@ namespace AFTS.Models
                 entity.ToTable("schedule");
 
                 entity.Property(e => e.ScheduleId).HasColumnName("schedule_id");
+
 
             });
 

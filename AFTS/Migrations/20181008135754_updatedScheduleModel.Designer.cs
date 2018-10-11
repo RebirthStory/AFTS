@@ -4,14 +4,16 @@ using AFTS.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AFTS.Migrations
 {
     [DbContext(typeof(tennisContext))]
-    partial class tennisContextModelSnapshot : ModelSnapshot
+    [Migration("20181008135754_updatedScheduleModel")]
+    partial class updatedScheduleModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -66,7 +68,7 @@ namespace AFTS.Migrations
                         .HasColumnName("description")
                         .HasColumnType("text");
 
-                    b.Property<int?>("MemberId");
+                    b.Property<int?>("MemberId1");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -76,7 +78,7 @@ namespace AFTS.Migrations
 
                     b.HasKey("EventId");
 
-                    b.HasIndex("MemberId");
+                    b.HasIndex("MemberId1");
 
                     b.ToTable("event");
                 });
@@ -152,9 +154,11 @@ namespace AFTS.Migrations
                         .HasColumnName("schedule_id")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("EventId");
+                    b.Property<int>("EventId")
+                        .HasColumnName("event_id");
 
-                    b.Property<int?>("MemberId");
+                    b.Property<int>("MemberId")
+                        .HasColumnName("member_id");
 
                     b.HasKey("ScheduleId");
 
@@ -167,9 +171,9 @@ namespace AFTS.Migrations
 
             modelBuilder.Entity("AFTS.Models.Event", b =>
                 {
-                    b.HasOne("AFTS.Models.Member", "Member")
+                    b.HasOne("AFTS.Models.Member", "MemberId")
                         .WithMany()
-                        .HasForeignKey("MemberId");
+                        .HasForeignKey("MemberId1");
                 });
 
             modelBuilder.Entity("AFTS.Models.Member", b =>
@@ -184,11 +188,13 @@ namespace AFTS.Migrations
                 {
                     b.HasOne("AFTS.Models.Event", "Event")
                         .WithMany()
-                        .HasForeignKey("EventId");
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("AFTS.Models.Member", "Member")
                         .WithMany()
-                        .HasForeignKey("MemberId");
+                        .HasForeignKey("MemberId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }
