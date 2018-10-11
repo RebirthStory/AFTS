@@ -7,19 +7,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - AFTS</title>
 
+    <!--DO NOT DELETE THE LINE BELOW OR ELSE WEBSITE WILL NOT FUNCTION PROPERLY-->
+    <partial name="_CookieConsentPartial" />
+
 
     <environment include="Development">
         <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-" crossorigin="anonymous">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
         <!--[if lte IE 8]>
-        <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-old-ie-min.css">
-    <![endif]-->
+            <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-old-ie-min.css">
+        <![endif]-->
         <!--[if gt IE 8]><!-->
         <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-min.css">
         <!--<![endif]-->
         <!--[if lte IE 8]>
-        <link rel="stylesheet" href="css/layouts/pricing-old-ie.css">
-    <![endif]-->
+            <link rel="stylesheet" href="css/layouts/pricing-old-ie.css">
+        <![endif]-->
         <!--[if gt IE 8]><!-->
         <link rel="stylesheet" href="css/layouts/price.css">
         <!--<![endif]-->
@@ -29,14 +32,14 @@
         <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-" crossorigin="anonymous">
 
         <!--[if lte IE 8]>
-        <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-old-ie-min.css">
-    <![endif]-->
+            <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-old-ie-min.css">
+        <![endif]-->
         <!--[if gt IE 8]><!-->
         <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-min.css">
         <!--<![endif]-->
         <!--[if lte IE 8]>
-        <link rel="stylesheet" href="css/layouts/pricing-old-ie.css">
-    <![endif]-->
+            <link rel="stylesheet" href="css/layouts/pricing-old-ie.css">
+        <![endif]-->
         <!--[if gt IE 8]><!-->
         <link rel="stylesheet" href="css/layouts/price.css">
         <!--<![endif]-->
@@ -69,7 +72,7 @@
                            <a href="#" id="menuLink1" class="pure-menu-link">Account</a>
                            <ul class="pure-menu-children">
                                <li class="pure-menu-item"><a href="#" class="pure-menu-link">Options</a></li>
-                               <li class="pure-menu-item"><a href="#" class="pure-menu-link">Sign Out</a></li>
+                               <li class="pure-menu-item"><a asp-controller="Home" asp-action="Logout" class="pure-menu-link">Sign Out</a></li>
                            </ul>
                        </li>
 
@@ -88,6 +91,7 @@
 
 
     </div>
+
    
     <div>
         @RenderBody()
