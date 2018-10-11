@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Http;
 
 namespace AFTS.Controllers
 {
+
+
     public class HomeController : Controller
     {
         private tennisContext _context;
@@ -83,6 +85,7 @@ namespace AFTS.Controllers
             {
                 HttpContext.Session.SetString("MemberId", account.MemberId.ToString());
                 HttpContext.Session.SetString("Email", account.Email);
+                HttpContext.Session.SetInt32("Role", account.RoleId);
                 return RedirectToAction("Welcome");
             }
             else
@@ -99,6 +102,8 @@ namespace AFTS.Controllers
             {
                 ViewBag.Email = HttpContext.Session.GetString("Email");
                 ViewBag.MemberId = HttpContext.Session.GetString("MemberId");
+                ViewBag.RoleId = HttpContext.Session.GetInt32("RoleId");
+                
                 return View();
             }
             else
