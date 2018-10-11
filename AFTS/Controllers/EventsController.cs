@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AFTS.Models;
 using Microsoft.AspNetCore.Http;
+using static Microsoft.AspNetCore.Hosting.Internal.HostingApplication;
 
 namespace AFTS.Controllers
 {
@@ -52,11 +53,13 @@ namespace AFTS.Controllers
             return View(@event);
         }
 
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Details(int id, Schedule schedule)
         {
-            var events = _context.Event;
+                var events = _context.Event;
             var @event = events.FirstOrDefault(e => e.EventId == id);
 
             if (ModelState.IsValid)

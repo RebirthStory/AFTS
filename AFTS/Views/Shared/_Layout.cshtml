@@ -53,18 +53,12 @@
 
            <ul class="pure-menu-list">
 
-               @if (Context.Session.GetInt32("RoleId") == 3)
+               @if (Context.Session.GetString("RoleId") == "3")
                {
-
-                   <li class="pure-menu-item"><i class="fa fa-handshake"></i></li>
-                   <li class="pure-menu-item"><a asp-controller="Coaches" asp-action="Index" class="pure-menu-link">Coaches</a></li>
 
                    <li class="pure-menu-item"><i class="fa fa-calendar-alt"></i></li>
                    <li class="pure-menu-item"><a asp-controller="Events" asp-action="Index" class="pure-menu-link">Events</a></li>
-                   <li class="pure-menu-item"><i class="fa fa-users"></i></li>
-                   <li class="pure-menu-item"><a asp-controller="Members" asp-action="Index" class="pure-menu-link">Members</a></li>
-                   <li class="pure-menu-item"><i class="fa fa-edit"></i></li>
-                   <li class="pure-menu-item"><a asp-controller="Schedules" asp-action="Index" class="pure-menu-link">Schedules</a></li>
+
 
                    <ul class="pure-menu-list">
                        <li class="pure-menu-item"><i class="fa fa-user"></i></li>
@@ -77,6 +71,22 @@
                        </li>
 
                    </ul>
+               }
+               else if (Context.Session.GetString("RoleId") == "2")
+               {
+
+
+               }
+               else if (Context.Session.GetString("RoleId") == "1")
+               {
+
+                   <li class="pure-menu-item"><i class="fa fa-handshake"></i></li>
+                   <li class="pure-menu-item"><a asp-controller="Coaches" asp-action="Index" class="pure-menu-link">Coaches</a></li>
+                   <li class="pure-menu-item"><i class="fa fa-users"></i></li>
+                   <li class="pure-menu-item"><a asp-controller="Members" asp-action="Index" class="pure-menu-link">Members</a></li>
+                   <li class="pure-menu-item"><i class="fa fa-edit"></i></li>
+                   <li class="pure-menu-item"><a asp-controller="Schedules" asp-action="Index" class="pure-menu-link">Schedules</a></li>
+
                }
                else
                {
@@ -91,13 +101,11 @@
 
 
 
-<<<<<<< HEAD
 
 </div>
-=======
+
     </div>
 
->>>>>>> bb45ec41306b8a5a63942df2ae8dcf51180aeeb5
    
     <div>
         @RenderBody()
