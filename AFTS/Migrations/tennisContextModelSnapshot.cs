@@ -66,7 +66,8 @@ namespace AFTS.Migrations
                         .HasColumnName("description")
                         .HasColumnType("text");
 
-                    b.Property<int?>("MemberId");
+                    b.Property<int>("MemberId")
+                        .HasColumnName("member_id");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -126,6 +127,11 @@ namespace AFTS.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("member");
+
+                    b.HasData(
+                        new { MemberId = 1, Biography = "admin", Dob = new DateTime(1991, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), Email = "admin@admin.com", Gender = "M", Name = "admin", Nickname = "admin", Password = "admin", RoleId = 1 },
+                        new { MemberId = 2, Biography = "coach", Dob = new DateTime(1991, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), Email = "coach@coach.com", Gender = "M", Name = "coach", Nickname = "coach", Password = "Member", RoleId = 2 }
+                    );
                 });
 
             modelBuilder.Entity("AFTS.Models.Role", b =>
@@ -143,6 +149,12 @@ namespace AFTS.Migrations
                     b.HasKey("RoleId");
 
                     b.ToTable("role");
+
+                    b.HasData(
+                        new { RoleId = 1, RoleType = "Admin" },
+                        new { RoleId = 2, RoleType = "Coach" },
+                        new { RoleId = 3, RoleType = "Member" }
+                    );
                 });
 
             modelBuilder.Entity("AFTS.Models.Schedule", b =>
@@ -152,9 +164,11 @@ namespace AFTS.Migrations
                         .HasColumnName("schedule_id")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("EventId");
+                    b.Property<int>("EventId")
+                        .HasColumnName("event_id");
 
-                    b.Property<int?>("MemberId");
+                    b.Property<int>("MemberId")
+                        .HasColumnName("member_id");
 
                     b.HasKey("ScheduleId");
 
@@ -169,7 +183,8 @@ namespace AFTS.Migrations
                 {
                     b.HasOne("AFTS.Models.Member", "Member")
                         .WithMany()
-                        .HasForeignKey("MemberId");
+                        .HasForeignKey("MemberId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("AFTS.Models.Member", b =>
@@ -184,11 +199,13 @@ namespace AFTS.Migrations
                 {
                     b.HasOne("AFTS.Models.Event", "Event")
                         .WithMany()
-                        .HasForeignKey("EventId");
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("AFTS.Models.Member", "Member")
                         .WithMany()
-                        .HasForeignKey("MemberId");
+                        .HasForeignKey("MemberId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }
