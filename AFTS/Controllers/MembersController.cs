@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AFTS.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace AFTS.Controllers
 {
@@ -21,7 +22,21 @@ namespace AFTS.Controllers
         // GET: Members
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Member.ToListAsync());
+
+            var MemberId = HttpContext.Session.GetString("MemberId");
+            var RoleId = HttpContext.Session.GetString("RoleId");
+
+            if (MemberId == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            else if (RoleId == "1")
+            {
+                return View(await _context.Member.ToListAsync());
+            }
+
+            return RedirectToAction("Index", "Home");
+
         }
 
         // GET: Members/Details/5
@@ -32,20 +47,40 @@ namespace AFTS.Controllers
                 return NotFound();
             }
 
-            var member = await _context.Member
-                .FirstOrDefaultAsync(m => m.MemberId == id);
-            if (member == null)
+            var MemberId = HttpContext.Session.GetString("MemberId");
+            var RoleId = HttpContext.Session.GetString("RoleId");
+
+            if (MemberId != null && RoleId == "1")
             {
-                return NotFound();
+                var member = await _context.Member.FirstOrDefaultAsync(m => m.MemberId == id);
+                if (member == null)
+                {
+                    return NotFound();
+                }
+
+                return View(member);
             }
 
-            return View(member);
+
+            return RedirectToAction("Login", "Home");
+
+
         }
 
         // GET: Members/Create
         public IActionResult Create()
         {
-            return View();
+            
+            var MemberId = HttpContext.Session.GetString("MemberId");
+            var RoleId = HttpContext.Session.GetString("RoleId");
+
+            if (MemberId != null && RoleId == "1")
+            {
+                return View();
+            }
+
+
+            return RedirectToAction("Login", "Home");
         }
 
         // POST: Members/Create
@@ -72,12 +107,22 @@ namespace AFTS.Controllers
                 return NotFound();
             }
 
-            var member = await _context.Member.FindAsync(id);
-            if (member == null)
+            var MemberId = HttpContext.Session.GetString("MemberId");
+            var RoleId = HttpContext.Session.GetString("RoleId");
+
+            if (MemberId != null && RoleId == "1")
             {
-                return NotFound();
+                var member = await _context.Member.FindAsync(id);
+                if (member == null)
+                {
+                    return NotFound();
+                }
+                return View(member);
             }
-            return View(member);
+
+
+            return RedirectToAction("Login", "Home");
+
         }
 
         // POST: Members/Edit/5
@@ -123,14 +168,25 @@ namespace AFTS.Controllers
                 return NotFound();
             }
 
-            var member = await _context.Member
-                .FirstOrDefaultAsync(m => m.MemberId == id);
-            if (member == null)
+            var MemberId = HttpContext.Session.GetString("MemberId");
+            var RoleId = HttpContext.Session.GetString("RoleId");
+
+            if (MemberId != null && RoleId == "1")
             {
-                return NotFound();
+                var member = await _context.Member
+                    .FirstOrDefaultAsync(m => m.MemberId == id);
+                if (member == null)
+                {
+                    return NotFound();
+                }
+
+                return View(member);
             }
 
-            return View(member);
+
+            return RedirectToAction("Login", "Home");
+
+
         }
 
         // POST: Members/Delete/5

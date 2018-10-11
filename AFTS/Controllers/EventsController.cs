@@ -13,46 +13,55 @@ namespace AFTS.Controllers
 {
     public class EventsController : Controller
     {
+
         private readonly tennisContext _context;
 
         public EventsController(tennisContext context)
         {
             _context = context;
+
         }
 
         // GET: Events
+        
+
         public async Task<IActionResult> Index()
         {
-            ViewBag.EnrollError = "You have already enrolled in this event.";
-            return View(await _context.Event.ToListAsync());
+            var MemberId = HttpContext.Session.GetString("MemberId");
+
+            if (MemberId != null)
+            {
+                return View(await _context.Event.ToListAsync());
+            }
+
+
+            return RedirectToAction("Login", "Home");
         }
 
         // GET: Events/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            var MemberId = HttpContext.Session.GetString("MemberId");
+
             if (id == null)
             {
                 return NotFound();
             }
 
-
-            var eVM = new EventSchduleViewModel()
+            if (MemberId != null)
             {
-
-            };
-
-
-
-
-            var @event = await _context.Event
-                .FirstOrDefaultAsync(m => m.EventId == id);
-            if (@event == null)
-            {
-                return NotFound();
+                var @event = await _context.Event
+                    .FirstOrDefaultAsync(m => m.EventId == id);
+                if (@event == null)
+                {
+                    return NotFound();
+                }
+                return View(@event);
             }
-            return View(@event);
-        }
 
+
+            return RedirectToAction("Login", "Home");
+        }
 
 
         [HttpPost]
@@ -108,7 +117,19 @@ namespace AFTS.Controllers
             // GET: Events/Create
             public IActionResult Create()
         {
-            return View();
+
+            var MemberId = HttpContext.Session.GetString("MemberId");
+            var RoleId = HttpContext.Session.GetString("RoleId");
+
+            if (MemberId != null && RoleId == "1")
+            {
+                return View();
+            }
+
+
+            return RedirectToAction("Login", "Home");
+
+            
         }
 
         // POST: Events/Create
@@ -135,12 +156,23 @@ namespace AFTS.Controllers
                 return NotFound();
             }
 
-            var @event = await _context.Event.FindAsync(id);
-            if (@event == null)
+            var MemberId = HttpContext.Session.GetString("MemberId");
+            var RoleId = HttpContext.Session.GetString("RoleId");
+
+            if (MemberId != null && RoleId == "1")
             {
-                return NotFound();
+                var @event = await _context.Event.FindAsync(id);
+                if (@event == null)
+                {
+                    return NotFound();
+                }
+                return View(@event);
             }
-            return View(@event);
+
+
+            return RedirectToAction("Login", "Home");
+
+
         }
 
         // POST: Events/Edit/5
@@ -186,14 +218,24 @@ namespace AFTS.Controllers
                 return NotFound();
             }
 
-            var @event = await _context.Event
-                .FirstOrDefaultAsync(m => m.EventId == id);
-            if (@event == null)
+            var MemberId = HttpContext.Session.GetString("MemberId");
+            var RoleId = HttpContext.Session.GetString("RoleId");
+
+            if (MemberId != null && RoleId == "1")
             {
-                return NotFound();
+                var @event = await _context.Event.FirstOrDefaultAsync(m => m.EventId == id);
+                if (@event == null)
+                {
+                    return NotFound();
+                }
+
+                return View(@event);
             }
 
-            return View(@event);
+
+            return RedirectToAction("Login", "Home");
+
+
         }
 
         // POST: Events/Delete/5
@@ -208,8 +250,6 @@ namespace AFTS.Controllers
         }
 
         
-        
-
 
 
         private bool EventExists(int id)

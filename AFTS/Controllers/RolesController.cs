@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AFTS.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace AFTS.Controllers
 {
@@ -21,7 +22,18 @@ namespace AFTS.Controllers
         // GET: Roles
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Role.ToListAsync());
+
+
+            var MemberId = HttpContext.Session.GetString("MemberId");
+            var RoleId = HttpContext.Session.GetString("RoleId");
+
+            if (MemberId != null && RoleId == "1")
+            {
+                return View(await _context.Role.ToListAsync());
+            }
+
+
+            return RedirectToAction("Login", "Home");
         }
 
         // GET: Roles/Details/5
@@ -32,20 +44,40 @@ namespace AFTS.Controllers
                 return NotFound();
             }
 
-            var role = await _context.Role
-                .FirstOrDefaultAsync(m => m.RoleId == id);
-            if (role == null)
+            var MemberId = HttpContext.Session.GetString("MemberId");
+            var RoleId = HttpContext.Session.GetString("RoleId");
+
+            if (MemberId != null && RoleId == "1")
             {
-                return NotFound();
+                var role = await _context.Role
+                    .FirstOrDefaultAsync(m => m.RoleId == id);
+                if (role == null)
+                {
+                    return NotFound();
+                }
+
+                return View(role);
             }
 
-            return View(role);
+
+            return RedirectToAction("Login", "Home");
+
+
         }
 
         // GET: Roles/Create
         public IActionResult Create()
         {
-            return View();
+            var MemberId = HttpContext.Session.GetString("MemberId");
+            var RoleId = HttpContext.Session.GetString("RoleId");
+
+            if (MemberId != null && RoleId == "1")
+            {
+                return View();
+            }
+
+
+            return RedirectToAction("Login", "Home");
         }
 
         // POST: Roles/Create
@@ -72,12 +104,24 @@ namespace AFTS.Controllers
                 return NotFound();
             }
 
-            var role = await _context.Role.FindAsync(id);
-            if (role == null)
+            var MemberId = HttpContext.Session.GetString("MemberId");
+            var RoleId = HttpContext.Session.GetString("RoleId");
+
+            if (MemberId != null && RoleId == "1")
             {
-                return NotFound();
+                var role = await _context.Role
+                    .FirstOrDefaultAsync(m => m.RoleId == id);
+                if (role == null)
+                {
+                    return NotFound();
+                }
+
             }
-            return View(role);
+
+
+            return RedirectToAction("Login", "Home");
+
+
         }
 
         // POST: Roles/Edit/5
@@ -123,14 +167,25 @@ namespace AFTS.Controllers
                 return NotFound();
             }
 
-            var role = await _context.Role
-                .FirstOrDefaultAsync(m => m.RoleId == id);
-            if (role == null)
+            var MemberId = HttpContext.Session.GetString("MemberId");
+            var RoleId = HttpContext.Session.GetString("RoleId");
+
+            if (MemberId != null && RoleId == "1")
             {
-                return NotFound();
+                var role = await _context.Role
+                    .FirstOrDefaultAsync(m => m.RoleId == id);
+                if (role == null)
+                {
+                    return NotFound();
+                }
+
+                return View(role);
             }
 
-            return View(role);
+
+            return RedirectToAction("Login", "Home");
+
+
         }
 
         // POST: Roles/Delete/5

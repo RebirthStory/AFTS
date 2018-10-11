@@ -1,4 +1,4 @@
-﻿@model AFTS.Models.Schedule
+﻿@model EventSchduleViewModel
 
 @{
     ViewData["Title"] = "Details";
@@ -10,18 +10,20 @@
     <table class="pure-table pure-table-horizontal">
         <thead>
             <tr>
-                <th>@Html.DisplayNameFor(model => model.ScheduleId)</th>
-
-                <th>Enrolled Members</th>
+                <th>@Html.DisplayNameFor(model => model.Members)</th>
 
             </tr>
         </thead>
         <tbody>
+            @foreach (var item in Model.Members)
+            {
+
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+            </tr>
+            }
 
 
-                <tr>
 
-                </tr>
-   
         </tbody>
     </table>

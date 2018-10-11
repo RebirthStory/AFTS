@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AFTS.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace AFTS.Controllers
 {
@@ -21,7 +22,40 @@ namespace AFTS.Controllers
         // GET: Schedules
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Schedule.ToListAsync());
+
+            var MemberIdString = HttpContext.Session.GetString("MemberId");
+            var RoleIdString = HttpContext.Session.GetString("RoleId");
+
+            Int32.TryParse(MemberIdString, out int MemberId);
+            Int32.TryParse(RoleIdString, out int RoleId);
+
+            if (MemberIdString != null)
+            {
+
+                var coachEvents = _context.Event.Where(c => c.MemberId == MemberId).Include(m => m.Member).ToList();
+
+                var coachschedule = _context.Schedule.Where(s => s.EventId == s.Event.EventId && s.Event.MemberId == MemberId).Include(e => e.Event).ToList();
+
+
+                var eVM = _context.Schedule.Select(s => new EventSchduleViewModel
+                {
+                    Schedules = coachschedule,
+                    Events = coachEvents
+
+                });
+
+                var eVM2 = new EventSchduleViewModel
+                {
+                    Schedules = coachschedule,
+                    Events = coachEvents
+
+                };
+
+                return View(eVM2);
+            }
+
+
+            return RedirectToAction("Login", "Home");
         }
 
         // GET: Schedules/Details/5
@@ -32,20 +66,60 @@ namespace AFTS.Controllers
                 return NotFound();
             }
 
-            var schedule = await _context.Schedule
-                .FirstOrDefaultAsync(m => m.ScheduleId == id);
-            if (schedule == null)
+            var MemberId = HttpContext.Session.GetString("MemberId");
+            var RoleIdString = HttpContext.Session.GetString("RoleId");
+
+            Int32.TryParse(RoleIdString, out int RoleId);
+
+            if (MemberId != null)
             {
-                return NotFound();
+                var schedule = _context.Schedule.FirstOrDefault(s => s.ScheduleId == id);
+
+                if (schedule == null)
+                {
+                    return NotFound();
+                }
+
+                var coachEvents = _context.Event.Where(c => c.MemberId == RoleId).ToList();
+
+                var members = _context.Member.Where(c => c.MemberId == schedule.MemberId).ToList();
+
+               var eVM = _context.Schedule.Select(s => new EventSchduleViewModel
+               {
+                   Events = coachEvents,
+                   Members = members
+               });
+
+                var eVM2 = new EventSchduleViewModel
+                {
+                    Events = coachEvents,
+                    Members = members
+
+                };
+
+                return View(eVM2);
             }
 
-            return View(schedule);
+
+            return RedirectToAction("Login", "Home");
+
+
         }
 
         // GET: Schedules/Create
         public IActionResult Create()
         {
-            return View();
+
+            var MemberId = HttpContext.Session.GetString("MemberId");
+            var RoleId = HttpContext.Session.GetString("RoleId");
+
+            if (MemberId != null && RoleId == "1" || RoleId == "2")
+            {
+                return View();
+            }
+
+
+            return RedirectToAction("Login", "Home");
         }
 
         // POST: Schedules/Create
@@ -72,12 +146,23 @@ namespace AFTS.Controllers
                 return NotFound();
             }
 
-            var schedule = await _context.Schedule.FindAsync(id);
-            if (schedule == null)
+            var MemberId = HttpContext.Session.GetString("MemberId");
+            var RoleId = HttpContext.Session.GetString("RoleId");
+
+            if (MemberId != null && RoleId == "1" || RoleId == "2")
             {
-                return NotFound();
+                var schedule = await _context.Schedule.FindAsync(id);
+                if (schedule == null)
+                {
+                    return NotFound();
+                }
+                return View(schedule);
             }
-            return View(schedule);
+
+
+            return RedirectToAction("Login", "Home");
+
+
         }
 
         // POST: Schedules/Edit/5
@@ -123,14 +208,24 @@ namespace AFTS.Controllers
                 return NotFound();
             }
 
-            var schedule = await _context.Schedule
-                .FirstOrDefaultAsync(m => m.ScheduleId == id);
-            if (schedule == null)
+            var MemberId = HttpContext.Session.GetString("MemberId");
+            var RoleId = HttpContext.Session.GetString("RoleId");
+
+            if (MemberId != null && RoleId == "1" || RoleId == "2")
             {
-                return NotFound();
+                var schedule = await _context.Schedule
+                    .FirstOrDefaultAsync(m => m.ScheduleId == id);
+                if (schedule == null)
+                {
+                    return NotFound();
+                }
+
+                return View(schedule);
             }
 
-            return View(schedule);
+
+            return RedirectToAction("Login", "Home");
+
         }
 
         // POST: Schedules/Delete/5
