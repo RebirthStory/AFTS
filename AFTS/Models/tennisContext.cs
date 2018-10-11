@@ -82,6 +82,11 @@ namespace AFTS.Models
                     .IsUnicode(false);
 
 
+                entity.Property(e => e.MemberId).HasColumnName("member_id");
+
+
+
+
             });
 
             modelBuilder.Entity<Member>(entity =>
@@ -119,6 +124,10 @@ namespace AFTS.Models
 
                 entity.Property(e => e.ScheduleId).HasColumnName("schedule_id");
 
+                entity.Property(e => e.MemberId).HasColumnName("member_id");
+
+                entity.Property(e => e.EventId).HasColumnName("event_id");
+
 
             });
 
@@ -133,6 +142,39 @@ namespace AFTS.Models
 
 
             });
+
+
+            modelBuilder.Entity<Member>().HasData(
+new
+{
+    MemberId = 1,
+    Name = "admin",
+    Nickname = "admin",
+    Dob = DateTime.Parse("1991-01-01"),
+    Gender = "M",
+    Biography = "admin",
+    Email = "admin@admin.com",
+    Password = "admin",
+    RoleId = 1
+},
+new
+{
+    MemberId = 2,
+    Name = "coach",
+    Nickname = "coach",
+    Dob = DateTime.Parse("1991-01-01"),
+    Gender = "M",
+    Biography = "coach",
+    Email = "coach@coach.com",
+    Password = "Member",
+    RoleId = 2
+});
+        
+
+        modelBuilder.Entity<Role>().HasData(
+    new { RoleId = 1, RoleType = "Admin"},
+    new { RoleId = 2, RoleType = "Coach"},
+    new { RoleId = 3, RoleType = "Member" });
         }
 
     

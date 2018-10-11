@@ -9,12 +9,11 @@ namespace AFTS.Models
     {
         public int scheduleId;
         public string eventName;
-        public string member;
         public string coach;
 
-        public Event Event;
-        public Member Member;
-        public Schedule Schedule;
+        public List <Event> Events;
+        public List<Member> Members;
+        public List<Schedule> Schedules;
 
     }
 }
