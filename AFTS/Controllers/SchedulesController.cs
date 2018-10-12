@@ -32,16 +32,12 @@ namespace AFTS.Controllers
             if (MemberIdString != null)
             {
 
-                var coachEvents = _context.Event.Where(c => c.MemberId == MemberId).Include(m => m.Member).ToList();
 
-                var coachschedule = _context.Schedule.Where(s => s.EventId == s.Event.EventId && s.Event.MemberId == MemberId).Include(e => e.Event).ToList();
 
-                var schdules = from s in _context.Schedule
-                             select s;
-
-                var membersInEvent = from m in _context.Member
+                var coachEvents = from m in _context.Member
                                      join s in _context.Schedule on m.MemberId equals s.MemberId
                                      join e in _context.Event on s.EventId equals e.EventId
+                                     where s.Event.MemberId == MemberId
                                      select e;
 
 
@@ -49,15 +45,14 @@ namespace AFTS.Controllers
 
                 var eVM = _context.Schedule.Select(s => new EventSchduleViewModel
                 {
-                    Schedules = coachschedule,
-                    Events = membersInEvent.ToList()
+                    Events = coachEvents.ToList()
 
                 });
 
                 var eVM2 = new EventSchduleViewModel
                 {
-                    Schedules = coachschedule,
-                    Events = membersInEvent.ToList()
+                    
+                    Events = coachEvents.ToList()
 
                 };
 
