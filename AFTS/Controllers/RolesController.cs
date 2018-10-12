@@ -116,6 +116,7 @@ namespace AFTS.Controllers
                     return NotFound();
                 }
 
+                return View(role);
             }
 
 

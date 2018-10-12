@@ -137,7 +137,7 @@ namespace AFTS.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("EventId,Name,Description,Date")] Event @event)
+        public async Task<IActionResult> Create([Bind("EventId,Name,Description,MemberId,Date")] Event @event)
         {
             if (ModelState.IsValid)
             {
@@ -180,7 +180,7 @@ namespace AFTS.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("EventId,Name,Description,Date")] Event @event)
+        public async Task<IActionResult> Edit(int id, [Bind("EventId,Name,Description,MemberId,Date")] Event @event)
         {
             if (id != @event.EventId)
             {

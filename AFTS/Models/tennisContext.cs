@@ -166,7 +166,7 @@ new
     Gender = "M",
     Biography = "coach",
     Email = "coach@coach.com",
-    Password = "Member",
+    Password = "coach",
     RoleId = 2
 });
         

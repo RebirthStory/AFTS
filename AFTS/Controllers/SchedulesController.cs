@@ -36,18 +36,28 @@ namespace AFTS.Controllers
 
                 var coachschedule = _context.Schedule.Where(s => s.EventId == s.Event.EventId && s.Event.MemberId == MemberId).Include(e => e.Event).ToList();
 
+                var schdules = from s in _context.Schedule
+                             select s;
+
+                var membersInEvent = from m in _context.Member
+                                     join s in _context.Schedule on m.MemberId equals s.MemberId
+                                     join e in _context.Event on s.EventId equals e.EventId
+                                     select e;
+
+
+
 
                 var eVM = _context.Schedule.Select(s => new EventSchduleViewModel
                 {
                     Schedules = coachschedule,
-                    Events = coachEvents
+                    Events = membersInEvent.ToList()
 
                 });
 
                 var eVM2 = new EventSchduleViewModel
                 {
                     Schedules = coachschedule,
-                    Events = coachEvents
+                    Events = membersInEvent.ToList()
 
                 };
 
@@ -75,6 +85,10 @@ namespace AFTS.Controllers
             {
                 var schedule = _context.Schedule.FirstOrDefault(s => s.ScheduleId == id);
 
+                var selectedEvent = _context.Event.FirstOrDefault(e => e.EventId == id);
+
+
+
                 if (schedule == null)
                 {
                     return NotFound();
@@ -84,16 +98,21 @@ namespace AFTS.Controllers
 
                 var members = _context.Member.Where(c => c.MemberId == schedule.MemberId).ToList();
 
-               var eVM = _context.Schedule.Select(s => new EventSchduleViewModel
-               {
-                   Events = coachEvents,
-                   Members = members
+                var membersInEvent = from m in _context.Member
+
+                                     join s in _context.Schedule on m.MemberId equals s.MemberId
+                                     join e in _context.Event on s.EventId equals e.EventId
+                                     where e.EventId == selectedEvent.EventId
+                                     select m;
+
+                var eVM = _context.Schedule.Select(s => new EventSchduleViewModel
+                {
+                    Members = membersInEvent.ToList()
                });
 
                 var eVM2 = new EventSchduleViewModel
                 {
-                    Events = coachEvents,
-                    Members = members
+                    Members = membersInEvent.ToList()
 
                 };
 
