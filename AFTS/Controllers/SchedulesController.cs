@@ -29,35 +29,48 @@ namespace AFTS.Controllers
             Int32.TryParse(MemberIdString, out int MemberId);
             Int32.TryParse(RoleIdString, out int RoleId);
 
+            if (MemberIdString != null && MemberId == 1)
+            {
+                var allEvents = _context.Event
+                    .Include(member => member.Member)
+                    .ToList();
+
+                var eVM2 = new EventSchduleViewModel
+                {
+
+                    Events = allEvents.ToList()
+
+                };
+                return View(eVM2);
+            }
+
             if (MemberIdString != null)
             {
 
+                var coachesEvents = _context.Event
+                    .Include(member => member.Member)
+                    .Where(e => e.MemberId == MemberId)
+                    .ToList();
 
 
-                var coachEvents = from m in _context.Member
-                                     join s in _context.Schedule on m.MemberId equals s.MemberId
-                                     join e in _context.Event on s.EventId equals e.EventId
-                                     where s.Event.MemberId == MemberId
-                                     select e;
+                var memberSchedule = _context.Schedule
+                    .Where(e => e.MemberId == MemberId)
+                    .Include(events => events.Event)
+                    .Include(events => events.Event.Member)
+                    .ToList();
 
-
-
-
-                var eVM = _context.Schedule.Select(s => new EventSchduleViewModel
-                {
-                    Events = coachEvents.ToList()
-
-                });
 
                 var eVM2 = new EventSchduleViewModel
                 {
                     
-                    Events = coachEvents.ToList()
+                    Events = coachesEvents.ToList(),
+                    MemberSchedule = memberSchedule.ToList()
 
                 };
 
                 return View(eVM2);
             }
+
 
 
             return RedirectToAction("Login", "Home");
@@ -76,7 +89,7 @@ namespace AFTS.Controllers
 
             Int32.TryParse(RoleIdString, out int RoleId);
 
-            if (MemberId != null)
+            if (MemberId != null && RoleId == 1 || RoleId == 2)
             {
                 var schedule = _context.Schedule.FirstOrDefault(s => s.ScheduleId == id);
 
@@ -94,7 +107,6 @@ namespace AFTS.Controllers
                 var members = _context.Member.Where(c => c.MemberId == schedule.MemberId).ToList();
 
                 var membersInEvent = from m in _context.Member
-
                                      join s in _context.Schedule on m.MemberId equals s.MemberId
                                      join e in _context.Event on s.EventId equals e.EventId
                                      where e.EventId == selectedEvent.EventId
@@ -113,7 +125,6 @@ namespace AFTS.Controllers
 
                 return View(eVM2);
             }
-
 
             return RedirectToAction("Login", "Home");
 
@@ -257,5 +268,6 @@ namespace AFTS.Controllers
         {
             return _context.Schedule.Any(e => e.ScheduleId == id);
         }
+
     }
 }
