@@ -79,7 +79,7 @@ namespace AFTS.Controllers
                     ModelState.Clear();
                     ViewBag.Message = user.Email + " has successfully registered.";
                 }
-                return RedirectToAction("Index", "Home");
+                return View();
             }
 
             return RedirectToAction("Index", "Home");
@@ -110,7 +110,6 @@ namespace AFTS.Controllers
             if (account != null)
             {
                 HttpContext.Session.SetString("MemberId", account.MemberId.ToString());
-                HttpContext.Session.SetString("Name", account.Name.ToString());
                 HttpContext.Session.SetString("Email", account.Email);
                 HttpContext.Session.SetString("RoleId", account.RoleId.ToString());
                 return RedirectToAction("Welcome");
