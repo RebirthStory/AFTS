@@ -23,19 +23,17 @@ namespace AFTS.Controllers
         public async Task<IActionResult> Index()
         {
 
-            var MemberId = HttpContext.Session.GetString("MemberId");
+            var MemberIdString = HttpContext.Session.GetString("MemberId");
             var RoleId = HttpContext.Session.GetString("RoleId");
 
-            if (MemberId == null)
+            Int32.TryParse(MemberIdString, out int MemberId);
+
+            if (MemberIdString != null && RoleId == "1")
             {
-                return RedirectToAction("Login", "Home");
-            }
-            else if (RoleId == "1")
-            {
-                return View(await _context.Member.ToListAsync());
+                return View(await _context.Member.Include(roles => roles.Role).ToListAsync());
             }
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "Home");
 
         }
 
@@ -47,12 +45,24 @@ namespace AFTS.Controllers
                 return NotFound();
             }
 
-            var MemberId = HttpContext.Session.GetString("MemberId");
+            var MemberIdString = HttpContext.Session.GetString("MemberId");
             var RoleId = HttpContext.Session.GetString("RoleId");
 
-            if (MemberId != null && RoleId == "1")
+            Int32.TryParse(MemberIdString, out int MemberId);
+
+            if (MemberIdString != null && RoleId == "1")
             {
                 var member = await _context.Member.FirstOrDefaultAsync(m => m.MemberId == id);
+                if (member == null)
+                {
+                    return NotFound();
+                }
+
+                return View(member);
+            }
+           else if (MemberIdString != null && RoleId == "2" || RoleId == "3")
+            {
+                var member = await _context.Member.FirstOrDefaultAsync(m => m.MemberId == MemberId);
                 if (member == null)
                 {
                     return NotFound();
@@ -88,7 +98,7 @@ namespace AFTS.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MemberId,Name,Dob,Gender")] Member member)
+        public async Task<IActionResult> Create([Bind("MemberId,Name,Nickname,Email,Password,Dob,Gender,Biography,RoleId")] Member member)
         {
             if (ModelState.IsValid)
             {
@@ -107,12 +117,24 @@ namespace AFTS.Controllers
                 return NotFound();
             }
 
-            var MemberId = HttpContext.Session.GetString("MemberId");
+            var MemberIdString = HttpContext.Session.GetString("MemberId");
             var RoleId = HttpContext.Session.GetString("RoleId");
 
-            if (MemberId != null && RoleId == "1")
+            Int32.TryParse(MemberIdString, out int MemberId);
+
+            if (MemberIdString != null && RoleId == "1")
             {
                 var member = await _context.Member.FindAsync(id);
+                if (member == null)
+                {
+                    return NotFound();
+                }
+                return View(member);
+            }
+
+            else if (MemberIdString != null && RoleId == "2")
+            {
+                var member = await _context.Member.FindAsync(MemberId);
                 if (member == null)
                 {
                     return NotFound();
@@ -130,7 +152,7 @@ namespace AFTS.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("MemberId,Name,Dob,Gender")] Member member)
+        public async Task<IActionResult> Edit(int id, [Bind("MemberId,Name,Nickname,Email,Password,Dob,Gender,Biography,RoleId")] Member member)
         {
             if (id != member.MemberId)
             {
