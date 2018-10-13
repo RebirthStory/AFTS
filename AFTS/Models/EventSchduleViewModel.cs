@@ -12,6 +12,7 @@ namespace AFTS.Models
         public string coach;
 
         public List <Event> Events;
+        public List<Schedule> MemberSchedule;
         public List<Member> Members;
         public List<Schedule> Schedules;
 
