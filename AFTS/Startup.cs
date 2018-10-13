@@ -53,10 +53,12 @@ namespace AFTS
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseStatusCodePagesWithRedirects("/Home/Error/{0}");
             }
             else
             {
                 app.UseExceptionHandler("/Home/Error");
+                app.UseStatusCodePagesWithRedirects("/Home/Error/{0}");
                 app.UseHsts();
             }
 

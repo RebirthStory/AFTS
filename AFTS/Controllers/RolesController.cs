@@ -33,7 +33,7 @@ namespace AFTS.Controllers
             }
 
 
-            return RedirectToAction("Login", "Home");
+            return NotFound();
         }
 
         // GET: Roles/Details/5
@@ -60,7 +60,7 @@ namespace AFTS.Controllers
             }
 
 
-            return RedirectToAction("Login", "Home");
+            return NotFound();
 
 
         }
@@ -77,7 +77,7 @@ namespace AFTS.Controllers
             }
 
 
-            return RedirectToAction("Login", "Home");
+            return NotFound();
         }
 
         // POST: Roles/Create
@@ -120,7 +120,7 @@ namespace AFTS.Controllers
             }
 
 
-            return RedirectToAction("Login", "Home");
+            return NotFound();
 
 
         }
@@ -184,7 +184,7 @@ namespace AFTS.Controllers
             }
 
 
-            return RedirectToAction("Login", "Home");
+            return NotFound();
 
 
         }

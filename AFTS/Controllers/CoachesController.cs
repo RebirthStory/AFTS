@@ -147,7 +147,7 @@ namespace AFTS.Controllers
                 return View(coach);
             }
 
-            return RedirectToAction("Login", "Home");
+            return NotFound();
         }
 
         // POST: Coaches/Delete/5

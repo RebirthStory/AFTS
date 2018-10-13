@@ -127,9 +127,9 @@ namespace AFTS.Controllers
             }
 
 
-            return RedirectToAction("Login", "Home");
+            return NotFound();
 
-            
+
         }
 
         // POST: Events/Create
@@ -170,7 +170,7 @@ namespace AFTS.Controllers
             }
 
 
-            return RedirectToAction("Login", "Home");
+            return NotFound();
 
 
         }
@@ -233,7 +233,7 @@ namespace AFTS.Controllers
             }
 
 
-            return RedirectToAction("Login", "Home");
+            return NotFound();
 
 
         }

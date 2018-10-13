@@ -33,7 +33,7 @@ namespace AFTS.Controllers
                 return View(await _context.Member.Include(roles => roles.Role).ToListAsync());
             }
 
-            return RedirectToAction("Login", "Home");
+            return NotFound();
 
         }
 
@@ -72,7 +72,7 @@ namespace AFTS.Controllers
             }
 
 
-            return RedirectToAction("Login", "Home");
+            return NotFound();
 
 
         }
@@ -90,7 +90,7 @@ namespace AFTS.Controllers
             }
 
 
-            return RedirectToAction("Login", "Home");
+            return NotFound();
         }
 
         // POST: Members/Create
@@ -143,7 +143,7 @@ namespace AFTS.Controllers
             }
 
 
-            return RedirectToAction("Login", "Home");
+            return NotFound();
 
         }
 
@@ -206,7 +206,7 @@ namespace AFTS.Controllers
             }
 
 
-            return RedirectToAction("Login", "Home");
+            return NotFound();
 
 
         }

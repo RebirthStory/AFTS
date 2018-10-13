@@ -144,7 +144,7 @@ namespace AFTS.Controllers
             }
 
 
-            return RedirectToAction("Login", "Home");
+            return NotFound();
         }
 
         // POST: Schedules/Create
@@ -174,7 +174,7 @@ namespace AFTS.Controllers
             var MemberId = HttpContext.Session.GetString("MemberId");
             var RoleId = HttpContext.Session.GetString("RoleId");
 
-            if (MemberId != null && RoleId == "1" || RoleId == "2")
+            if (MemberId != null && RoleId == "1")
             {
                 var schedule = await _context.Schedule.FindAsync(id);
                 if (schedule == null)
@@ -185,7 +185,7 @@ namespace AFTS.Controllers
             }
 
 
-            return RedirectToAction("Login", "Home");
+            return NotFound();
 
 
         }
@@ -236,7 +236,7 @@ namespace AFTS.Controllers
             var MemberId = HttpContext.Session.GetString("MemberId");
             var RoleId = HttpContext.Session.GetString("RoleId");
 
-            if (MemberId != null && RoleId == "1" || RoleId == "2")
+            if (MemberId != null && RoleId == "1")
             {
                 var schedule = await _context.Schedule
                     .FirstOrDefaultAsync(m => m.ScheduleId == id);
@@ -249,7 +249,7 @@ namespace AFTS.Controllers
             }
 
 
-            return RedirectToAction("Login", "Home");
+            return NotFound();
 
         }
 
