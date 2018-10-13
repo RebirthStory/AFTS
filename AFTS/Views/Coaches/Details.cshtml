@@ -1,20 +1,29 @@
-﻿@model AFTS.Models.Coach
+﻿@model AFTS.Models.Member
+@using Microsoft.AspNetCore.Http
 
 @{
     ViewData["Title"] = "Details";
 }
 
 <h2>Details</h2>
-
+@if (Context.Session.GetString("RoleId") == "1")
+{
 <div>
-    <h4>Coach</h4>
+    <h4>Member</h4>
     <hr />
+
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Name)
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Email)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Nickname)
@@ -29,6 +38,12 @@
             @Html.DisplayFor(model => model.Dob)
         </dd>
         <dt>
+            @Html.DisplayNameFor(model => model.Gender)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Gender)
+        </dd>
+        <dt>
             @Html.DisplayNameFor(model => model.Biography)
         </dt>
         <dd>
@@ -37,6 +52,58 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.CoachId">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model.MemberId">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
+
+}
+ else if (Context.Session.GetString("RoleId") == "2" || Context.Session.GetString("RoleId") == "3")
+{
+<div>
+    <h4>Member</h4>
+    <hr />
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Nickname)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Nickname)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Dob)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Dob)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Gender)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Gender)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Biography)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Biography)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+}
+
