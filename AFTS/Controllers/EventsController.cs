@@ -256,5 +256,8 @@ namespace AFTS.Controllers
         {
             return _context.Event.Any(e => e.EventId == id);
         }
+
+
+
     }
 }
