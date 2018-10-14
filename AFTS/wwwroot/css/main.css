@@ -7,6 +7,10 @@ body {
     color: #526066;
 }
 
+.main{
+
+}
+
 h2, h3 {
     letter-spacing: 0.25em;
     text-transform: uppercase;
@@ -428,113 +432,79 @@ a {
 
 
 
+/*responsive nav*/
 
-
-/* ------------------------------------------ TESTING FOR POP UP MENU -------------------------------------------*/
-* {
-    margin: 0px;
-    padding: 0px;
-    font-family: Helvetica, Arial, sans-serif;
+.custom-wrapper {
+    background-color: #fff;
+    -webkit-font-smoothing: antialiased;
+    height: 2.1em;
+    overflow: hidden;
+    -webkit-transition: height 0.5s;
+    -moz-transition: height 0.5s;
+    -ms-transition: height 0.5s;
+    transition: height 0.5s;
 }
 
-/* Full-width input fields */
-input[type=text], input[type=password] {
-    width: 90%;
-    padding: 12px 20px;
-    margin: 8px 26px;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-    font-size: 16px;
-}
-
-input[type=text], input[type=Email] {
-    width: 90%;
-    padding: 12px 20px;
-    margin: 8px 26px;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-    font-size: 16px;
-}
-
-/* Set a style for all buttons */
-button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 26px;
-    border: none;
-    cursor: pointer;
-    width: 90%;
-    font-size: 20px;
-}
-
-    button:hover {
-        opacity: 0.8;
+    .custom-wrapper.open {
+        height: 17em;
     }
 
-/* Center the image and position the close button */
-.imgcontainer {
-    text-align: center;
-    margin: 24px 0 12px 0;
-    position: relative;
+.custom-menu-3 {
+    text-align: right;
 }
 
-.avatar {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-}
-
-/* The Modal (background) */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.4);
-}
-
-/* Modal Content Box */
-.modal-content {
-    background-color: #fefefe;
-    margin: 4% auto 15% auto;
-    border: 1px solid #888;
-    width: 40%;
-    padding-bottom: 30px;
-}
-
-/* The Close Button (x) */
-.close {
+.custom-toggle {
+    width: 34px;
+    height: 34px;
     position: absolute;
-    right: 25px;
     top: 0;
-    color: #000;
-    font-size: 35px;
-    font-weight: bold;
+    right: 0;
+    display: none;
 }
 
-    .close:hover, .close:focus {
-        color: red;
-        cursor: pointer;
+    .custom-toggle .bar {
+        background-color: #777;
+        display: block;
+        width: 20px;
+        height: 2px;
+        border-radius: 100px;
+        position: absolute;
+        top: 18px;
+        right: 7px;
+        -webkit-transition: all 0.5s;
+        -moz-transition: all 0.5s;
+        -ms-transition: all 0.5s;
+        transition: all 0.5s;
     }
 
-/* Add Zoom Animation */
-.animate {
-    animation: zoom 0.6s
-}
+        .custom-toggle .bar:first-child {
+            -webkit-transform: translateY(-6px);
+            -moz-transform: translateY(-6px);
+            -ms-transform: translateY(-6px);
+            transform: translateY(-6px);
+        }
 
-@keyframes zoom {
-    from {
-        transform: scale(0)
+    .custom-toggle.x .bar {
+        -webkit-transform: rotate(45deg);
+        -moz-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
     }
 
-    to {
-        transform: scale(1)
+        .custom-toggle.x .bar:first-child {
+            -webkit-transform: rotate(-45deg);
+            -moz-transform: rotate(-45deg);
+            -ms-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+        }
+
+@media (max-width: 47.999em) {
+
+    .custom-menu-3 {
+        text-align: left;
+    }
+
+    .custom-toggle {
+        display: block;
     }
 }
