@@ -1,8 +1,11 @@
-﻿/*
+﻿.pure-table pure-table-horizontal{
+    padding: 5em;
+    align-content:center;
+}
+/*
  * -- BASE STYLES --
  * Most of these are inherited from Base, but I want to change a few.
  */
-
 body {
     color: #526066;
 }
@@ -88,6 +91,7 @@ p {
 }
 
 .pricing-tables {
+
     margin-bottom: 3.125em;
     text-align: center;
 }
@@ -97,6 +101,7 @@ p {
  * Every pricing table has the .pricing-table class
  */
 .pricing-table {
+    align-content: center;
     border: 1px solid #ddd;
     margin: 0 0.5em 2em;
     padding: 0 0 3em;
