@@ -30,7 +30,7 @@ namespace AFTS.Controllers
 
         public IActionResult Index()
         {
-            return View(_context.Member.ToList());
+            return View();
         }
 
         public IActionResult About()
