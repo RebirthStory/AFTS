@@ -37,7 +37,7 @@
 <body>
     <!---------------------------------------------------------------------------------- Start of HB Navbar------------------------------------------------------------------------------------------------------------------>
     <header class="header">
-        <a href="" class="logo">CSS Nav</a>
+        <a asp-action="Index" class="logo">AFT Schedule</a>
         <input class="menu-btn" type="checkbox" id="menu-btn" />
         <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
         <ul class="menu">
@@ -68,7 +68,6 @@
                         <ul class="pure-menu-list">
 
                             <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
-                                <a href="#" id="menuLink1" class="pure-menu-link"><i class="fa fa-user"></i> Account</a>
                                 <ul class="pure-menu-children">
                                     <li class="pure-menu-item"><a asp-controller="Members" asp-action="Details" asp-route-id="@Context.Session.GetString("MemberId")" class="pure-menu-link">My Account</a></li>
                                     <li class="pure-menu-item"><a asp-controller="Home" asp-action="Logout" class="pure-menu-link">Sign Out</a></li>
@@ -89,10 +88,8 @@
 
                         <ul class="pure-menu-list">
                             <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
-                                <a href="#" id="menuLink1" class="pure-menu-link"><i class="fa fa-user"></i> Account</a>
                                 <ul class="pure-menu-children">
-                                    <li class="pure-menu-item"><a asp-controller="Members" asp-action="Details" asp-route-id="@Context.Session.GetString("MemberId")" class="pure-menu-link">My Account</a></li>
-                                    <li class="pure-menu-item"><a asp-controller="Home" asp-action="Logout" class="pure-menu-link">Sign Out</a></li>
+                                <li class="pure-menu-item"><a asp-controller="Home" asp-action="Logout" class="pure-menu-link">Sign Out</a></li>
                                 </ul>
                             </li>
 
@@ -115,23 +112,17 @@
                         <li class="pure-menu-item"><a asp-controller="Schedules" asp-action="Index" class="pure-menu-link"><i class="fa fa-edit"></i> All Schedules</a></li>
 
                         <ul class="pure-menu-list">
-                            <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
-                                <a href="#" id="menuLink1" class="pure-menu-link"><i class="fa fa-user"></i> Account</a>
-                                <ul class="pure-menu-children">
-                                    <li class="pure-menu-item"><a asp-controller="Members" asp-action="Details" asp-route-id="@Context.Session.GetString("MemberId")" class="pure-menu-link">My Account</a></li>
+
                                     <li class="pure-menu-item"><a asp-controller="Home" asp-action="Logout" class="pure-menu-link">Sign Out</a></li>
                                 </ul>
-                            </li>
-
-                        </ul>
                         <li class="pure-menu-item">Welcome @Context.Session.GetString("Name")</li>
 
                     }
+
                     else
                     {
 
                         <li class="pure-menu-item"><a asp-controller="Home" asp-action="Register" class="pure-menu-link">Register</a></li>
-                        <li class="pure-menu-item"><i class="fa fa-user-circle"></i></li>
                         <li class="pure-menu-item"><a asp-controller="Home" asp-action="Login" class="pure-menu-link">Login</a></li>
                     }
 
