@@ -1,8 +1,4 @@
-﻿.pure-table pure-table-horizontal{
-    padding: 5em;
-    align-content:center;
-}
-/*
+﻿/*
  * -- BASE STYLES --
  * Most of these are inherited from Base, but I want to change a few.
  */
@@ -19,6 +15,7 @@ h2, h3 {
 p {
     line-height: 1.6em;
 }
+
 
 
 /*
@@ -543,5 +540,9 @@ button {
     to {
         transform: scale(1)
     }
+}
+
+.footer 1-box{
+    align-content:bottom;
 }
 
