@@ -120,7 +120,7 @@ namespace AFTS.Controllers
                 HttpContext.Session.SetString("Name", account.Name.ToString());
                 HttpContext.Session.SetString("Email", account.Email);
                 HttpContext.Session.SetString("RoleId", account.RoleId.ToString());
-                return RedirectToAction("Welcome");
+                return RedirectToAction("Index");
             }
             else
             {
