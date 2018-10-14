@@ -33,6 +33,7 @@ p {
     padding: 0.5em 2em;
 }
 
+
 /*
  * -- MENU STYLES --
  * Make the menu have a very faint box-shadow.
@@ -283,148 +284,112 @@ p {
 
 
 
-/* -------------------------------------------- TESTING HAMBURGER MENU ------------------------------------------*/
-body {
-    margin: 0;
-    font-family: Helvetica, sans-serif;
-    background-color: #f4f4f4;
+/* ------------------------------------------ TESTING FOR POP UP MENU -------------------------------------------*/
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family: Helvetica, Arial, sans-serif;
 }
 
-a {
-    color: #000;
+/* Full-width input fields */
+input[type=text], input[type=password] {
+    width: 90%;
+    padding: 12px 20px;
+    margin: 8px 26px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-size: 16px;
 }
 
-/* header */
+input[type=text], input[type=Email] {
+    width: 90%;
+    padding: 12px 20px;
+    margin: 8px 26px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-size: 16px;
+}
 
-.header {
-    background-color: #fff;
-    box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
+/* Set a style for all buttons */
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 26px;
+    border: none;
+    cursor: pointer;
+    width: 90%;
+    font-size: 20px;
+}
+
+    button:hover {
+        opacity: 0.8;
+    }
+
+/* Center the image and position the close button */
+.imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+    position: relative;
+}
+
+.avatar {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none;
     position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
     width: 100%;
-    z-index: 3;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
 }
 
-    .header ul {
-        margin: 0;
-        padding: 0;
-        list-style: none;
-        overflow: hidden;
-        background-color: #fff;
-    }
+/* Modal Content Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 4% auto 15% auto;
+    border: 1px solid #888;
+    width: 40%;
+    padding-bottom: 30px;
+}
 
-    .header li a {
-        display: block;
-        padding: 20px 20px;
-        border-right: 1px solid #f4f4f4;
-        text-decoration: none;
-    }
+/* The Close Button (x) */
+.close {
+    position: absolute;
+    right: 25px;
+    top: 0;
+    color: #000;
+    font-size: 35px;
+    font-weight: bold;
+}
 
-        .header li a:hover,
-        .header .menu-btn:hover {
-            background-color: #f4f4f4;
-        }
-
-    .header .logo {
-        display: block;
-        float: left;
-        font-size: 2em;
-        padding: 10px 20px;
-        text-decoration: none;
-    }
-
-    /* menu */
-
-    .header .menu {
-        clear: both;
-        max-height: 0;
-        transition: max-height .2s ease-out;
-    }
-
-    /* menu icon */
-
-    .header .menu-icon {
+    .close:hover, .close:focus {
+        color: red;
         cursor: pointer;
-        display: inline-block;
-        float: right;
-        padding: 28px 20px;
-        position: relative;
-        user-select: none;
     }
 
-        .header .menu-icon .navicon {
-            background: #333;
-            display: block;
-            height: 2px;
-            position: relative;
-            transition: background .2s ease-out;
-            width: 18px;
-        }
+/* Add Zoom Animation */
+.animate {
+    animation: zoom 0.6s
+}
 
-            .header .menu-icon .navicon:before,
-            .header .menu-icon .navicon:after {
-                background: #333;
-                content: '';
-                display: block;
-                height: 100%;
-                position: absolute;
-                transition: all .2s ease-out;
-                width: 100%;
-            }
-
-            .header .menu-icon .navicon:before {
-                top: 5px;
-            }
-
-            .header .menu-icon .navicon:after {
-                top: -5px;
-            }
-
-    /* menu btn */
-
-    .header .menu-btn {
-        display: none;
+@keyframes zoom {
+    from {
+        transform: scale(0)
     }
 
-        .header .menu-btn:checked ~ .menu {
-            max-height: 240px;
-        }
-
-        .header .menu-btn:checked ~ .menu-icon .navicon {
-            background: transparent;
-        }
-
-            .header .menu-btn:checked ~ .menu-icon .navicon:before {
-                transform: rotate(-45deg);
-            }
-
-            .header .menu-btn:checked ~ .menu-icon .navicon:after {
-                transform: rotate(45deg);
-            }
-
-        .header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
-        .header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
-            top: 0;
-        }
-
-/* 48em = 768px */
-
-@media (min-width: 48em) {
-    .header li {
-        float: left;
-    }
-
-        .header li a {
-            padding: 20px 30px;
-        }
-
-    .header .menu {
-        clear: none;
-        float: right;
-        max-height: none;
-    }
-
-    .header .menu-icon {
-        display: none;
+    to {
+        transform: scale(1)
     }
 }
 
@@ -508,3 +473,4 @@ a {
         display: block;
     }
 }
+
