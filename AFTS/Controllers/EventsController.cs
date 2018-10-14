@@ -22,9 +22,7 @@ namespace AFTS.Controllers
 
         }
 
-        // GET: Events
-        
-
+        // GET: All Events
         public async Task<IActionResult> Index()
         {
             var MemberId = HttpContext.Session.GetString("MemberId");
@@ -50,8 +48,7 @@ namespace AFTS.Controllers
 
             if (MemberId != null)
             {
-                var @event = await _context.Event
-                    .FirstOrDefaultAsync(m => m.EventId == id);
+                var @event = await _context.Event.FirstOrDefaultAsync(m => m.EventId == id);
                 if (@event == null)
                 {
                     return NotFound();
@@ -68,30 +65,27 @@ namespace AFTS.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Details(int id, Schedule schedule)
         {
-                var events = _context.Event;
-            var @event = events.FirstOrDefault(e => e.EventId == id);
+ 
+            var @event = _context.Event.FirstOrDefault(e => e.EventId == id);
 
             if (ModelState.IsValid)
             {
-                
-                var members = _context.Member;
-                var schedules = _context.Schedule;
 
                 var MemberIdString = HttpContext.Session.GetString("MemberId");
-
                 Int32.TryParse(MemberIdString, out int MemberId);
 
-                
 
                 var existingEnroll = await _context.Schedule.SingleOrDefaultAsync(s => s.Member.MemberId == MemberId && s.Event.EventId == id);
 
+                // Check if a user trys to enroll in the same event
                 if (existingEnroll != null)
                 {
                     ModelState.AddModelError("", "You have already enrolled in this event.");
                 }
+                // Enroll user in event
                 else
                 {
-                    var member = members.FirstOrDefault(m => m.MemberId == MemberId);
+                    var member = _context.Member.FirstOrDefault(m => m.MemberId == MemberId);
 
                     var eventSchedule = new Schedule()
                     {
@@ -121,11 +115,11 @@ namespace AFTS.Controllers
             var MemberId = HttpContext.Session.GetString("MemberId");
             var RoleId = HttpContext.Session.GetString("RoleId");
 
+            //Only admins can view this page. Admins have a role id of 1
             if (MemberId != null && RoleId == "1")
             {
                 return View();
             }
-
 
             return NotFound();
 
@@ -133,8 +127,6 @@ namespace AFTS.Controllers
         }
 
         // POST: Events/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("EventId,Name,Description,MemberId,Date")] Event @event)
@@ -159,9 +151,11 @@ namespace AFTS.Controllers
             var MemberId = HttpContext.Session.GetString("MemberId");
             var RoleId = HttpContext.Session.GetString("RoleId");
 
+            //Only admins can view this page. Admins have a role id of 1
             if (MemberId != null && RoleId == "1")
             {
                 var @event = await _context.Event.FindAsync(id);
+
                 if (@event == null)
                 {
                     return NotFound();
@@ -176,8 +170,6 @@ namespace AFTS.Controllers
         }
 
         // POST: Events/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("EventId,Name,Description,MemberId,Date")] Event @event)
@@ -221,6 +213,7 @@ namespace AFTS.Controllers
             var MemberId = HttpContext.Session.GetString("MemberId");
             var RoleId = HttpContext.Session.GetString("RoleId");
 
+            //Only admins can view this page. Admins have a role id of 1
             if (MemberId != null && RoleId == "1")
             {
                 var @event = await _context.Event.FirstOrDefaultAsync(m => m.EventId == id);
