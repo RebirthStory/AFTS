@@ -19,11 +19,10 @@ namespace AFTS.Controllers
             _context = context;
         }
 
-        // GET: Coaches
+        // GET: All Coaches. Coaches a members with a role id of 2
         public async Task<IActionResult> Index()
         {
             var MemberId = HttpContext.Session.GetString("MemberId");
-            var RoleId = HttpContext.Session.GetString("RoleId");
 
             if (MemberId != null)
             {
@@ -34,27 +33,24 @@ namespace AFTS.Controllers
 
         }
 
-        // GET: Coaches/Details/5
+        // GET: Coaches/Details/5 
         public async Task<IActionResult> Details(int? id)
         {
             var MemberId = HttpContext.Session.GetString("MemberId");
-            var RoleId = HttpContext.Session.GetString("RoleId");
 
             if (id == null)
             {
                 return NotFound();
             }
 
-
             if (MemberId != null)
             {
-                var coach = await _context.Member
-                                            .FirstOrDefaultAsync(m => m.MemberId == id);
+                var coach = await _context.Member.FirstOrDefaultAsync(m => m.MemberId == id);
+
                 if (coach == null)
                 {
                     return NotFound();
                 }
-
 
                 return View(coach);
             }
@@ -75,6 +71,7 @@ namespace AFTS.Controllers
                 return NotFound();
             }
 
+            //Only admins can view this page. Admins have a role id of 1
             if (MemberId != null && RoleId == "1")
             {
                 var coach = await _context.Member.FindAsync(id);
@@ -89,8 +86,6 @@ namespace AFTS.Controllers
         }
 
         // POST: Coaches/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("MemberId,Name,Nickname,Email,Password,Dob,Gender,Biography,RoleId")] Member coach)
@@ -134,6 +129,8 @@ namespace AFTS.Controllers
             {
                 return NotFound();
             }
+
+            //Only admins can view this page. Admins have a role id of 1
             if (MemberId != null && RoleId == "1")
             {
 

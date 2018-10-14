@@ -13,41 +13,15 @@ namespace AFTS.Controllers
 
     public class HomeController : Controller
     {
-
-
-
-       
-
         private tennisContext _context;
 
         public HomeController(tennisContext context)
         {
             _context = context;
-
-
         }
 
 
         public IActionResult Index()
-        {
-            return View();
-        }
-
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
-
-        public IActionResult Privacy()
         {
             return View();
         }
@@ -65,18 +39,20 @@ namespace AFTS.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        // GET: Home/Register
         public ActionResult Register()
         {
             return View();
         }
 
-
+        // POST: Home/Register
         [HttpPost]
         public ActionResult Register(Member user)
         {
             var MemberId = HttpContext.Session.GetString("MemberId");
             var RoleId = HttpContext.Session.GetString("RoleId");
 
+            // Checks if user is not registered
             if (MemberId == null)
             {
                 if (ModelState.IsValid)
@@ -86,6 +62,7 @@ namespace AFTS.Controllers
                     ModelState.Clear();
                     ViewBag.Message = user.Email + " has successfully registered.";
                 }
+
                 return RedirectToAction("Index", "Home");
             }
 
@@ -94,11 +71,13 @@ namespace AFTS.Controllers
 
         }
 
+        // GET: Home/Login
         public ActionResult Login()
         {
             var MemberId = HttpContext.Session.GetString("MemberId");
             var RoleId = HttpContext.Session.GetString("RoleId");
 
+            // Checks if user is not logged in
             if (MemberId == null)
             {
                 return View();
@@ -108,10 +87,11 @@ namespace AFTS.Controllers
 
         }
 
-
+        // POST: Home/Login
         [HttpPost]
         public ActionResult Login(Member user)
         {
+            // Checks if user have entered the correct email and password
             var account = _context.Member.Where(u => u.Email == user.Email && u.Password == user.Password).FirstOrDefault();
 
             if (account != null)
@@ -130,6 +110,7 @@ namespace AFTS.Controllers
             return View();
         }
 
+        // GET: Home/Welcome
         public ActionResult Welcome()
         {
             if (HttpContext.Session.GetString("MemberId") != null)
@@ -146,8 +127,10 @@ namespace AFTS.Controllers
             }
         }
 
+
         public ActionResult Logout()
         {
+            //Logout clears the session
             HttpContext.Session.Clear();
             return RedirectToAction("Index");
         }

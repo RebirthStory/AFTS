@@ -22,16 +22,14 @@ namespace AFTS.Controllers
         // GET: Roles
         public async Task<IActionResult> Index()
         {
-
-
             var MemberId = HttpContext.Session.GetString("MemberId");
             var RoleId = HttpContext.Session.GetString("RoleId");
 
+            //Only admins can view this page. Admins have a role id of 1
             if (MemberId != null && RoleId == "1")
             {
                 return View(await _context.Role.ToListAsync());
             }
-
 
             return NotFound();
         }
@@ -47,6 +45,7 @@ namespace AFTS.Controllers
             var MemberId = HttpContext.Session.GetString("MemberId");
             var RoleId = HttpContext.Session.GetString("RoleId");
 
+            //Only admins can view this page. Admins have a role id of 1
             if (MemberId != null && RoleId == "1")
             {
                 var role = await _context.Role
@@ -59,9 +58,7 @@ namespace AFTS.Controllers
                 return View(role);
             }
 
-
             return NotFound();
-
 
         }
 
@@ -71,18 +68,16 @@ namespace AFTS.Controllers
             var MemberId = HttpContext.Session.GetString("MemberId");
             var RoleId = HttpContext.Session.GetString("RoleId");
 
+            //Only admins can view this page. Admins have a role id of 1
             if (MemberId != null && RoleId == "1")
             {
                 return View();
             }
 
-
             return NotFound();
         }
 
         // POST: Roles/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("RoleId,RoleType")] Role role)
@@ -107,6 +102,7 @@ namespace AFTS.Controllers
             var MemberId = HttpContext.Session.GetString("MemberId");
             var RoleId = HttpContext.Session.GetString("RoleId");
 
+            //Only admins can view this page. Admins have a role id of 1
             if (MemberId != null && RoleId == "1")
             {
                 var role = await _context.Role
@@ -121,13 +117,9 @@ namespace AFTS.Controllers
 
 
             return NotFound();
-
-
         }
 
         // POST: Roles/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("RoleId,RoleType")] Role role)
@@ -171,6 +163,7 @@ namespace AFTS.Controllers
             var MemberId = HttpContext.Session.GetString("MemberId");
             var RoleId = HttpContext.Session.GetString("RoleId");
 
+            //Only admins can view this page. Admins have a role id of 1
             if (MemberId != null && RoleId == "1")
             {
                 var role = await _context.Role
@@ -185,7 +178,6 @@ namespace AFTS.Controllers
 
 
             return NotFound();
-
 
         }
 
