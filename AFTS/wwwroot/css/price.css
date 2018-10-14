@@ -29,6 +29,7 @@ p {
     padding: 0.5em 2em;
 }
 
+
 /*
  * -- MENU STYLES --
  * Make the menu have a very faint box-shadow.
@@ -538,3 +539,4 @@ button {
         transform: scale(1)
     }
 }
+
