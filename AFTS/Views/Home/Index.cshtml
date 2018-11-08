@@ -3,126 +3,43 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
-<div class="banner">
-    <h1 class="banner-head">
-        Anyone For Tennis Centre<br>
-        Where Roger Federer is a coach
-    </h1>
+<div class="row">
+        <div class="banner">
+            <h1 class="banner-head">
+                Anyone For Tennis Centre<br>
+                Where Roger Federer is a coach
+            </h1>
+        </div>
 </div>
-
-<div class="information pure-g">
-    @if (Context.Session.GetString("MemberId") != null)
-    {
-    }
-    else
-    {
-        <div class="pure-u-1 pure-u-md-1-2">
-            <div class="l-box">
-                <h3 class="information-head">Account</h3>
-
-
-                <p>
-                    <!-- Pop up for log in -->
-                    <button onclick="document.getElementById('modal-wrapper').style.display='block'" class="button-secondary pure-button">Login Popup</button>
-
-                    <div id="modal-wrapper" class="modal">
-
-                        <form class="modal-content animate" asp-controller="Home" asp-action="Login" method="post">
-
-                            <div class="imgcontainer">
-                                <span onclick="document.getElementById('modal-wrapper').style.display='none'" class="close" title="Close PopUp">&times;</span>
-                                <img src="~/images/User Image.png" alt="Image goes here" class="avatar">
-                                <h1 style="text-align:center">AFTS Schedule Log In</h1>
-                            </div>
-
-                            <!-- Pop up user -->
-                            <div class="container" asp-controller="Home" asp-action="Login" method="post">
-                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                <div class="form-group">
-                                    <label asp-for="Email" class="col-md-2 control-label"></label>
-                                    <div class="col-md-10">
-                                        <input asp-for="Email" class="form-control" />
-                                        <span asp-validation-for="Email" class="text-danger"></span>
-                                    </div>
-                                </div>
-
-                                <!-- Pop up password -->
-                                <div class="form-group">
-                                    <label asp-for="Password" class="col-md-2 control-label"></label>
-                                    <div class="col-md-10">
-                                        <input asp-for="Password" class="form-control" />
-                                        <span asp-validation-for="Password" class="text-danger"></span>
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn btn-default">Login</button>
-                                <input type="checkbox" style="margin:26px 30px;"> Remember me
-                                <a href="#" style="text-decoration:none; float:right; margin-right:34px; margin-top:26px;">Forgot Password ?</a>
-                            </div>
-
-                        </form>
-
-                    </div>
-                    <!-- Pop up for Log in -->
-
-                    <!-- Pop up for Register -->
-                    <button onclick="location.href='/Home/Register'" class="button-secondary pure-button">Register</button>
-
-                    <!-- End of Pop up for Register -->
-
-                </p>
-
-            </div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+            <h3 class="information-head">Get started today</h3>
+            <p>
+                Welcome to Anyone for Tennis! We are the number tennis center in the world, spitting out stars such as Roger Federer, Rafael Nadal and Novak Djokovic from our facilities. With Roger doubling as a full time coach here, you wouldn't want to miss the opportunity to be the next big star.
+            </p>
         </div>
-        <div class="pure-u-1 pure-u-md-1-2">
-            <div class="l-box">
-                <h3 class="information-head">Help</h3>
-
-                <p>
-                    <li class="pure-menu-item"><i class="fa fa-search"></i></li>
-                    <a href="#" class="pure-menu-link pure-menu-heading">Forgotten Username</a>
-
-                    <li class="pure-menu-item"><i class="fa fa-shield-alt"></i></li>
-                    <a href="#" class="pure-menu-link pure-menu-heading">Forgotten Password</a>
-                </p>
-
-            </div>
-        </div>
-    }
-
-    <div class="information pure-g">
-        <div class="pure-u-1 pure-u-md-1-2">
-            <div class="l-box">
-                <h3 class="information-head">Get started today</h3>
-                <p>
-                   Welcome to Anyone for Tennis! We are the number tennis center in the world, spitting out stars such as Roger Federer, Rafael Nadal and Novak Djokovic from our facilities. With Roger doubling as a full time coach here, you wouldn't want to miss the opportunity to be the next big star. 
-                </p>
-            </div>
-        </div>
-        <div class="pure-u-1 pure-u-md-1-2">
-            <div class="l-box">
+        <div class="col-lg-6">
                 <h3 class="information-head">Pay monthly or annually</h3>
                 <p>
                     We operate on an active subcription to be a member of the facility. You can either choose the monthly $10,0000 fee or a yearly cost of $100,000, saving you $20,000!
                 </p>
-            </div>
         </div>
-        <div class="pure-u-1 pure-u-md-1-2">
-            <div class="l-box">
-                <h3 class="information-head">24/7 customer support</h3>
-                <p>
-                      We provide 24/7 customer support, call us at any time of the day or night and one of our ex-pro staff memebers will gladly assist you with your queries.   
-                </p>
-            </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <h3 class="information-head">24/7 customer support</h3>
+            <p>
+                We provide 24/7 customer support, call us at any time of the day or night and one of our ex-pro staff memebers will gladly assist you with your queries.
+            </p>
         </div>
-        <div class="pure-u-1 pure-u-md-1-2">
-            <div class="l-box">
-                <h3 class="information-head">Cancel your plan anytime</h3>
-                <p>
-                    Not feeling like a star and wanting to give up? Well, you can cancel your membership at any time and embrace never becoming anything more than a failure in life.
-                </p>
-            </div>
+        <div class="col-lg-6">
+            <h3 class="information-head">Cancel your plan anytime</h3>
+            <p>
+                Not feeling like a star and wanting to give up? Well, you can cancel your membership at any time and embrace never becoming anything more than a failure in life.
+            </p>
         </div>
-    </div> <!-- end information -->
-</div> <!-- end l-content -->
+    </div> <!-- end l-content -->
+</div>

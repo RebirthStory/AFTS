@@ -38,9 +38,6 @@ p {
     margin: 0 auto;
 }
 
-.l-box {
-    padding: 0.5em 2em;
-}
 
 
 /*
@@ -209,6 +206,8 @@ p {
     background: #111;
     color: #888;
     text-align: center;
+    padding-top: 3em;
+    padding-bottom: 3em;
 }
 
     .footer a {
@@ -251,26 +250,9 @@ p {
 
 
 
-/* -- Button Css*/
-.button-secondary {
-    background: rgb(66, 184, 221); /* this is a light blue */
-    width: 100%;
-    height: 50px;
-    font-size: 1.2em;
-    color: white;
-}
 
 
 
-
-
-
-
-/* -- Button Css*/
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
 
 .dropdown-content {
     display: none;
@@ -300,42 +282,8 @@ p {
     font-family: Helvetica, Arial, sans-serif;
 }
 
-/* Full-width input fields */
-input[type=text], input[type=password] {
-    width: 90%;
-    padding: 12px 20px;
-    margin: 8px 26px;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-    font-size: 16px;
-}
 
-input[type=text], input[type=Email] {
-    width: 90%;
-    padding: 12px 20px;
-    margin: 8px 26px;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-    font-size: 16px;
-}
 
-/* Set a style for all buttons */
-button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 26px;
-    border: none;
-    cursor: pointer;
-    width: 90%;
-    font-size: 20px;
-}
-
-    button:hover {
-        opacity: 0.8;
-    }
 
 /* Center the image and position the close button */
 .imgcontainer {
@@ -403,83 +351,4 @@ button {
 }
 
 
-
-
-
-/*responsive nav*/
-
-.custom-wrapper {
-    background-color: #fff;
-    -webkit-font-smoothing: antialiased;
-    height: 2.1em;
-    overflow: hidden;
-    -webkit-transition: height 0.5s;
-    -moz-transition: height 0.5s;
-    -ms-transition: height 0.5s;
-    transition: height 0.5s;
-}
-
-    .custom-wrapper.open {
-        height: 17em;
-    }
-
-.custom-menu-3 {
-    text-align: right;
-}
-
-.custom-toggle {
-    width: 34px;
-    height: 34px;
-    position: absolute;
-    top: 0;
-    right: 0;
-    display: none;
-}
-
-    .custom-toggle .bar {
-        background-color: #777;
-        display: block;
-        width: 20px;
-        height: 2px;
-        border-radius: 100px;
-        position: absolute;
-        top: 18px;
-        right: 7px;
-        -webkit-transition: all 0.5s;
-        -moz-transition: all 0.5s;
-        -ms-transition: all 0.5s;
-        transition: all 0.5s;
-    }
-
-        .custom-toggle .bar:first-child {
-            -webkit-transform: translateY(-6px);
-            -moz-transform: translateY(-6px);
-            -ms-transform: translateY(-6px);
-            transform: translateY(-6px);
-        }
-
-    .custom-toggle.x .bar {
-        -webkit-transform: rotate(45deg);
-        -moz-transform: rotate(45deg);
-        -ms-transform: rotate(45deg);
-        transform: rotate(45deg);
-    }
-
-        .custom-toggle.x .bar:first-child {
-            -webkit-transform: rotate(-45deg);
-            -moz-transform: rotate(-45deg);
-            -ms-transform: rotate(-45deg);
-            transform: rotate(-45deg);
-        }
-
-@media (max-width: 47.999em) {
-
-    .custom-menu-3 {
-        text-align: left;
-    }
-
-    .custom-toggle {
-        display: block;
-    }
-}
 

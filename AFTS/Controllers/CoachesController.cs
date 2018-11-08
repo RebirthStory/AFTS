@@ -90,6 +90,7 @@ namespace AFTS.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("MemberId,Name,Nickname,Email,Password,Dob,Gender,Biography,RoleId")] Member coach)
         {
+
             if (id != coach.MemberId)
             {
                 return NotFound();
@@ -99,7 +100,9 @@ namespace AFTS.Controllers
             {
                 try
                 {
-                    _context.Update(coach);
+
+
+                     _context.Update(coach);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

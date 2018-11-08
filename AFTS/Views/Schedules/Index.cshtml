@@ -3,117 +3,123 @@
 
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Schedules";
 }
-
-@if (Context.Session.GetString("RoleId") == "1")
-{
-    <h2>Current Event Schedules</h2>
-    if (Model.Events.Count == 0)
-    {
-        <h3>There are no events</h3>
-    }
-    else
-    {
-        <table class="pure-table pure-table-horizontal">
-            <thead>
-                <tr>
-                    <th>@Html.DisplayNameFor(model => model.eventName)</th>
-                    <th>@Html.DisplayNameFor(model => model.coach)</th>
-
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.Events)
+<div class="container-fluid" style="padding-top: 40px; padding-bottom: 600px;">
+    <div class="row">
+        <div class="col-12 table-responsive">
+            @if (Context.Session.GetString("RoleId") == "1")
+            {
+                <h2>Current Event Schedules</h2>
+                if (Model.Events.Count == 0)
                 {
-
-                    <tr>
-                        <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                        <td><a asp-controller="Coaches" asp-action="Details" asp-route-id="@item.MemberId">@Html.DisplayFor(modelItem => item.Member.Name)</a></td>
-                        <td>
-                            <a class="button-success pure-button" asp-controller="Events" asp-action="Details" asp-route-id="@item.EventId">View Event</a>
-                            <a class="button-success pure-button" asp-controller="Schedules" asp-action="Details" asp-route-id="@item.EventId">View Members</a>
-                        </td>
-
-                    </tr>
+                    <h3>There are no events</h3>
                 }
-            </tbody>
-        </table>
-    }
-
-}
-else if (Context.Session.GetString("RoleId") == "2")
-{
-    <h2>My Events and Schedules</h2>
-    if (Model.Events.Count == 0)
-    {
-        <h3>You Have no upcoming events</h3>
-    }
-    else
-    {
-        <table class="pure-table pure-table-horizontal">
-            <thead>
-                <tr>
-                    <th>@Html.DisplayNameFor(model => model.eventName)</th>
-                    <th>@Html.DisplayNameFor(model => model.coach)</th>
-
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.Events)
+                else
                 {
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>@Html.DisplayNameFor(model => model.eventName)</th>
+                                <th>@Html.DisplayNameFor(model => model.coach)</th>
+                                <th></th>
 
-                    <tr>
-                        <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                        <td><a asp-controller="Coaches" asp-action="Details" asp-route-id="@item.MemberId">@Html.DisplayFor(modelItem => item.Member.Name)</a></td>
-                        <td>
-                            <a class="button-success pure-button" asp-controller="Events" asp-action="Details" asp-route-id="@item.EventId">View Event</a>
-                            <a class="button-success pure-button" asp-controller="Schedules" asp-action="Details" asp-route-id="@item.EventId">View Members</a>
-                        </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Events)
+                            {
 
-                    </tr>
+                                <tr>
+                                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                                    <td><a asp-controller="Coaches" asp-action="Details" asp-route-id="@item.MemberId">@Html.DisplayFor(modelItem => item.Member.Name)</a></td>
+                                    <td>
+                                        <a class="btn btn-primary" asp-controller="Events" asp-action="Details" asp-route-id="@item.EventId">View Event</a>
+                                        <a class="btn btn-primary" asp-controller="Schedules" asp-action="Details" asp-route-id="@item.EventId">View Members</a>
+                                    </td>
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
                 }
-            </tbody>
-        </table>
-    }
 
-
-}
-else if (Context.Session.GetString("RoleId") == "3")
-{
-    <h2>My Events and Schedules</h2>
-
-    if (Model.MemberSchedule.Count == 0)
-    {
-        <h3>You are not enrolled in any events</h3>
-    }
-    else
-    {
-        <table class="pure-table pure-table-horizontal">
-            <thead>
-                <tr>
-                    <th>@Html.DisplayNameFor(model => model.eventName)</th>
-                    <th>@Html.DisplayNameFor(model => model.coach)</th>
-
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.MemberSchedule)
+            }
+            else if (Context.Session.GetString("RoleId") == "2")
+            {
+                <h2>My Events and Schedules</h2>
+                if (Model.Events.Count == 0)
                 {
-
-                    <tr>
-                        <td>@Html.DisplayFor(modelItem => item.Event.Name)</td>
-                        <td><a asp-controller="Coaches" asp-action="Details" asp-route-id="@item.Event.MemberId">@Html.DisplayFor(modelItem => item.Event.Member.Name)</a></td>
-                        <td>
-                            <a class="button-success pure-button" asp-controller="Events" asp-action="Details" asp-route-id="@item.EventId">View Event</a>
-                        </td>
-
-                    </tr>
+                    <h3>You Have no upcoming events</h3>
                 }
-            </tbody>
-        </table>
-    }
+                else
+                {
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>@Html.DisplayNameFor(model => model.eventName)</th>
+                                <th>@Html.DisplayNameFor(model => model.coach)</th>
+                                <th></th>
 
-}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Events)
+                            {
+
+                                <tr>
+                                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                                    <td><a asp-controller="Coaches" asp-action="Details" asp-route-id="@item.MemberId">@Html.DisplayFor(modelItem => item.Member.Name)</a></td>
+                                    <td>
+                                        <a class="btn btn-primary" asp-controller="Events" asp-action="Details" asp-route-id="@item.EventId">View Event</a>
+                                        <a class="btn btn-primary" asp-controller="Schedules" asp-action="Details" asp-route-id="@item.EventId">View Members</a>
+                                    </td>
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
 
 
+            }
+            else if (Context.Session.GetString("RoleId") == "3")
+            {
+                <h2>My Events and Schedules</h2>
+
+                if (Model.MemberSchedule.Count == 0)
+                {
+                    <h3>You are not enrolled in any events</h3>
+                }
+                else
+                {
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>@Html.DisplayNameFor(model => model.eventName)</th>
+                                <th>@Html.DisplayNameFor(model => model.coach)</th>
+                                <th></th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.MemberSchedule)
+                            {
+
+                                <tr>
+                                    <td>@Html.DisplayFor(modelItem => item.Event.Name)</td>
+                                    <td><a asp-controller="Coaches" asp-action="Details" asp-route-id="@item.Event.MemberId">@Html.DisplayFor(modelItem => item.Event.Member.Name)</a></td>
+                                    <td>
+                                        <a class="btn btn-primary" asp-controller="Events" asp-action="Details" asp-route-id="@item.EventId">View Event</a>
+                                    </td>
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+
+            }
+        </div>
+    </div>
+</div>

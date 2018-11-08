@@ -164,6 +164,8 @@ namespace AFTS.Controllers
             {
                 try
                 {
+
+
                     _context.Update(member);
                     await _context.SaveChangesAsync();
                 }
